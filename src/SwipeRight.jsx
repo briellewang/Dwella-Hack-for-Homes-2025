@@ -18,7 +18,7 @@ import {
   properties,
   filterProperties,
   getDataRanges,
-} from "/src/data/properties.js";
+} from "@/data/properties.js";
 
 const SwipeHomePage = ({ setCurrentView }) => {
   const [currentCard, setCurrentCard] = useState(0);

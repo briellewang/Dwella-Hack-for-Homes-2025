@@ -15,7 +15,7 @@ import {
   getDataRanges,
   parsePriceRequirement,
   parseBedroomRequirement,
-} from "/src/data/properties.js";
+} from "@/data/properties.js";
 
 const AISearchPage = ({ setCurrentView }) => {
   const [inputText, setInputText] = useState("");

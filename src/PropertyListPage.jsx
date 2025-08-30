@@ -11,7 +11,7 @@ import {
   Filter,
   SortAsc,
 } from "lucide-react";
-import { getFavoriteProperties } from "/src/data/properties.js";
+import { getFavoriteProperties } from "@/data/properties.js";
 
 const PropertyListPage = ({ setCurrentView }) => {
   const [likedProperties, setLikedProperties] = useState(new Set());
