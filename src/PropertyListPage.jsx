@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { BottomNav } from "./NavigationBar";
 import {
   MapPin,
   Home,
@@ -165,7 +166,7 @@ const PropertyChatPage = ({ setCurrentView }) => {
               {
                 id: 1,
                 title: "Congratulations!",
-                content: "You’ve successfully secured this property. Please proceed to sign the tenancy agreement.",
+                content: "You've successfully secured this property. Please proceed to sign the tenancy agreement.",
                 type: "text"
               },
               {
@@ -224,8 +225,8 @@ const PropertyChatPage = ({ setCurrentView }) => {
 
     return (
       <div className="min-h-screen bg-gray-50 flex flex-col">
-        {/* 聊天头部 */}
-        <div className="bg-white border-b border-gray-200 p-4">
+        {/* 固定聊天头部 */}
+        <div className="fixed top-0 left-0 right-0 bg-white border-b border-gray-200 p-4 z-10">
           <div className="flex items-center">
             <button onClick={onBack} className="mr-3 p-1">
               <ArrowLeft className="w-6 h-6 text-gray-600" />
@@ -242,8 +243,8 @@ const PropertyChatPage = ({ setCurrentView }) => {
           </div>
         </div>
 
-        {/* 聊天内容 */}
-        <div className="flex-1 p-4 space-y-4 overflow-y-auto">
+        {/* 可滚动的聊天内容 */}
+        <div className="flex-1 pt-20 pb-20 p-4 space-y-4 overflow-y-auto">
           {/* 系统消息 */}
           <div className="flex justify-center">
             <div className="bg-gray-200 text-gray-600 text-xs px-3 py-1 rounded-full">
@@ -405,59 +406,6 @@ const PropertyChatPage = ({ setCurrentView }) => {
     );
   };
 
-  // 底部导航组件
-  const BottomNav = ({ currentView, setCurrentView }) => (
-    <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2 z-40 safe-area-bottom">
-      <div className="flex justify-around items-center h-16">
-        <button
-          onClick={() => setCurrentView("home")}
-          className={`flex flex-col items-center justify-center py-2 px-4 transition-colors ${
-            currentView === "home" ? "text-purple-600" : "text-gray-400"
-          }`}
-        >
-          <Home className="w-6 h-6 mb-1" />
-          <span className="text-xs">Discover</span>
-        </button>
-        <button
-          onClick={() => setCurrentView("property-list")}
-          className={`flex flex-col items-center justify-center py-2 px-4 transition-colors ${
-            currentView === "property-list" ? "text-purple-600" : "text-gray-400"
-          }`}
-        >
-          <MessageCircle className="w-6 h-6 mb-1" />
-          <span className="text-xs">Forum</span>
-        </button>
-        <button
-          onClick={() => setCurrentView("llm-input")}
-          className={`flex flex-col items-center justify-center py-2 px-4 transition-colors ${
-            currentView === "llm-input" ? "text-purple-600" : "text-gray-400"
-          }`}
-        >
-          <Search className="w-6 h-6 mb-1" />
-          <span className="text-xs">AI Search</span>
-        </button>
-        <button
-          onClick={() => setCurrentView("forum")}
-          className={`flex flex-col items-center justify-center py-2 px-4 transition-colors ${
-            currentView === "forum" ? "text-purple-600" : "text-gray-400"
-          }`}
-        >
-          <MessageCircle className="w-6 h-6 mb-1" />
-          <span className="text-xs">Forum</span>
-        </button>
-        <button
-          onClick={() => setCurrentView("profile")}
-          className={`flex flex-col items-center justify-center py-2 px-4 transition-colors ${
-            currentView === "profile" ? "text-purple-600" : "text-gray-400"
-          }`}
-        >
-          <User className="w-6 h-6 mb-1" />
-          <span className="text-xs">Profile</span>
-        </button>
-      </div>
-    </div>
-  );
-
   // 如果选中了房产，显示聊天页面
   if (selectedProperty) {
     return (
@@ -475,8 +423,8 @@ const PropertyChatPage = ({ setCurrentView }) => {
   // 主列表页面
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
-      {/* Header */}
-      <div className="p-4 border-b border-gray-200 bg-white">
+      {/* 固定的Header */}
+      <div className="fixed top-0 left-0 right-0 p-4 border-b border-gray-200 bg-white z-10">
         <div className="flex items-center justify-between mb-4">
           <h1 className="text-xl font-semibold">Property Chats</h1>
         </div>
@@ -503,151 +451,151 @@ const PropertyChatPage = ({ setCurrentView }) => {
         </div>
       </div>
 
-      {/* Property Chat List */}
-      <div className="flex-1 overflow-y-auto pb-24">
-        {sortedProperties.map((property) => (
-          <div key={property.id} className="relative overflow-hidden">
-            {/* 右划删除背景 */}
-            <div className="absolute inset-y-0 right-0 flex items-center justify-end pr-6 bg-red-500 w-20">
-              <span className="text-white font-semibold text-sm">Delete</span>
+      {/* 可滚动的Property Chat List */}
+      <div className="flex-1 pt-28 pb-20 overflow-y-auto">
+        {sortedProperties.length === 0 ? (
+          <div className="flex-1 flex items-center justify-center p-8">
+            <div className="text-center">
+              <MessageCircle className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+              <h3 className="text-lg font-semibold text-gray-600 mb-2">
+                No property chats yet
+              </h3>
+              <p className="text-gray-400 mb-6">
+                Start browsing to connect with landlords
+              </p>
+              <button
+                onClick={() => setCurrentView("home")}
+                className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-3 rounded-2xl font-semibold"
+              >
+                Start Browsing
+              </button>
             </div>
-            
-            {/* 聊天框 */}
-            <div
-              className="bg-white border-b border-gray-100 p-4 relative z-10 transform transition-transform duration-200 cursor-pointer"
-              onClick={() => openPropertyChat(property)}
-              style={{
-                transform: `translateX(0px)`,
-                transition: 'transform 0.3s ease'
-              }}
-              onTouchStart={(e) => {
-                const startX = e.touches[0].clientX;
-                const startTime = Date.now();
-                let currentTranslateX = 0;
-                
-                const handleTouchMove = (moveEvent) => {
-                  const currentX = moveEvent.touches[0].clientX;
-                  const diff = startX - currentX;
+          </div>
+        ) : (
+          sortedProperties.map((property) => (
+            <div key={property.id} className="relative overflow-hidden">
+              {/* 右划删除背景 */}
+              <div className="absolute inset-y-0 right-0 flex items-center justify-end pr-6 bg-red-500 w-20">
+                <span className="text-white font-semibold text-sm">Delete</span>
+              </div>
+              
+              {/* 聊天框 */}
+              <div
+                className="bg-white border-b border-gray-100 p-4 relative z-10 transform transition-transform duration-200 cursor-pointer"
+                onClick={() => openPropertyChat(property)}
+                style={{
+                  transform: `translateX(0px)`,
+                  transition: 'transform 0.3s ease'
+                }}
+                onTouchStart={(e) => {
+                  const startX = e.touches[0].clientX;
+                  const startTime = Date.now();
+                  let currentTranslateX = 0;
                   
-                  if (diff > 0 && diff <= 80) {
-                    currentTranslateX = -diff;
-                    e.currentTarget.style.transform = `translateX(${currentTranslateX}px)`;
-                  }
-                };
-                
-                const handleTouchEnd = () => {
-                  const endTime = Date.now();
-                  const timeDiff = endTime - startTime;
+                  const handleTouchMove = (moveEvent) => {
+                    const currentX = moveEvent.touches[0].clientX;
+                    const diff = startX - currentX;
+                    
+                    if (diff > 0 && diff <= 80) {
+                      currentTranslateX = -diff;
+                      e.currentTarget.style.transform = `translateX(${currentTranslateX}px)`;
+                    }
+                  };
                   
-                  if (Math.abs(currentTranslateX) > 40 || (Math.abs(currentTranslateX) > 20 && timeDiff < 300)) {
-                    // 删除操作
-                    e.currentTarget.style.transform = `translateX(-100%)`;
-                    setTimeout(() => {
-                      handleSwipeDelete(property.id);
-                    }, 300);
-                  } else {
-                    // 恢复原位
-                    e.currentTarget.style.transform = `translateX(0px)`;
-                  }
+                  const handleTouchEnd = () => {
+                    const endTime = Date.now();
+                    const timeDiff = endTime - startTime;
+                    
+                    if (Math.abs(currentTranslateX) > 40 || (Math.abs(currentTranslateX) > 20 && timeDiff < 300)) {
+                      // 删除操作
+                      e.currentTarget.style.transform = `translateX(-100%)`;
+                      setTimeout(() => {
+                        handleSwipeDelete(property.id);
+                      }, 300);
+                    } else {
+                      // 恢复原位
+                      e.currentTarget.style.transform = `translateX(0px)`;
+                    }
+                    
+                    document.removeEventListener('touchmove', handleTouchMove);
+                    document.removeEventListener('touchend', handleTouchEnd);
+                  };
                   
-                  document.removeEventListener('touchmove', handleTouchMove);
-                  document.removeEventListener('touchend', handleTouchEnd);
-                };
-                
-                document.addEventListener('touchmove', handleTouchMove);
-                document.addEventListener('touchend', handleTouchEnd);
-              }}
-            >
-              <div className="flex items-start space-x-3">
-                {/* 头像/图标 */}
-                <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
-                  <Home className="w-6 h-6 text-purple-600" />
+                  document.addEventListener('touchmove', handleTouchMove);
+                  document.addEventListener('touchend', handleTouchEnd);
+                }}
+              >
+                <div className="flex items-start space-x-3">
+                  {/* 头像/图标 */}
+                  <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Home className="w-6 h-6 text-purple-600" />
+                  </div>
+
+                  {/* 内容 */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between mb-1">
+                      <h3 className="font-semibold text-gray-800 truncate">
+                        {property.title}
+                      </h3>
+                      <div className="flex items-center space-x-2 flex-shrink-0">
+                        {property.unreadCount > 0 && (
+                          <div className="bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                            {property.unreadCount}
+                          </div>
+                        )}
+                        <span className="text-xs text-gray-400">{property.time}</span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center text-xs text-gray-500 mb-1">
+                      <MapPin className="w-3 h-3 mr-1" />
+                      <span>{property.location}</span>
+                    </div>
+
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex space-x-2 text-xs text-gray-500">
+                        <span>{property.bedrooms} bed</span>
+                        <span>{property.bathrooms} bath</span>
+                        <span>{property.area}</span>
+                      </div>
+                      <div className="text-sm font-bold text-purple-600">
+                        {property.price}
+                      </div>
+                    </div>
+
+                    <p className="text-sm text-gray-600 mb-2 line-clamp-1">
+                      {property.description}
+                    </p>
+
+                    {/* Features */}
+                    <div className="flex space-x-1 mb-2">
+                      {property.features.slice(0, 2).map((feature, index) => (
+                        <span
+                          key={index}
+                          className="px-2 py-1 bg-purple-50 text-purple-600 text-xs rounded-full"
+                        >
+                          {feature}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* 最后消息 */}
+                    <p className={`text-sm truncate ${
+                      property.unreadCount > 0 ? 'text-gray-800 font-medium' : 'text-gray-500'
+                    }`}>
+                      {property.lastMessage}
+                    </p>
+                  </div>
+
+                  <ChevronRight className="w-5 h-5 text-gray-400 flex-shrink-0" />
                 </div>
-
-                {/* 内容 */}
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center justify-between mb-1">
-                    <h3 className="font-semibold text-gray-800 truncate">
-                      {property.title}
-                    </h3>
-                    <div className="flex items-center space-x-2 flex-shrink-0">
-                      {property.unreadCount > 0 && (
-                        <div className="bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                          {property.unreadCount}
-                        </div>
-                      )}
-                      <span className="text-xs text-gray-400">{property.time}</span>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center text-xs text-gray-500 mb-1">
-                    <MapPin className="w-3 h-3 mr-1" />
-                    <span>{property.location}</span>
-                  </div>
-
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex space-x-2 text-xs text-gray-500">
-                      <span>{property.bedrooms} bed</span>
-                      <span>{property.bathrooms} bath</span>
-                      <span>{property.area}</span>
-                    </div>
-                    <div className="text-sm font-bold text-purple-600">
-                      {property.price}
-                    </div>
-                  </div>
-
-                  <p className="text-sm text-gray-600 mb-2 line-clamp-1">
-                    {property.description}
-                  </p>
-
-                  {/* Features */}
-                  <div className="flex space-x-1 mb-2">
-                    {property.features.slice(0, 2).map((feature, index) => (
-                      <span
-                        key={index}
-                        className="px-2 py-1 bg-purple-50 text-purple-600 text-xs rounded-full"
-                      >
-                        {feature}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* 最后消息 */}
-                  <p className={`text-sm truncate ${
-                    property.unreadCount > 0 ? 'text-gray-800 font-medium' : 'text-gray-500'
-                  }`}>
-                    {property.lastMessage}
-                  </p>
-                </div>
-
-                <ChevronRight className="w-5 h-5 text-gray-400 flex-shrink-0" />
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
 
-      {/* Empty State */}
-      {sortedProperties.length === 0 && (
-        <div className="flex-1 flex items-center justify-center p-8">
-          <div className="text-center">
-            <MessageCircle className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-gray-600 mb-2">
-              No property chats yet
-            </h3>
-            <p className="text-gray-400 mb-6">
-              Start browsing to connect with landlords
-            </p>
-            <button
-              onClick={() => setCurrentView("home")}
-              className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-3 rounded-2xl font-semibold"
-            >
-              Start Browsing
-            </button>
-          </div>
-        </div>
-      )}
-
+      {/* 固定的底部导航栏 */}
       <BottomNav currentView="property-list" setCurrentView={setCurrentView} />
     </div>
   );
