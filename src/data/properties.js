@@ -162,17 +162,26 @@ export const extractPrice = (priceString) => {
 };
 
 export const parsePriceRequirement = (query) => {
+  // Match prices like $3000, $2,500, under $3000, etc.
   const priceRegex =
-    /(?:under|below|less than|maximum|max|up to)\s*\$?(\d{1,2}(?:,\d{3})*)/i;
+    /(?:under|below|less than|maximum|max|up to)\s*\$?(\d{1,4}(?:,\d{3})*)/i;
   const match = query.match(priceRegex);
   if (match) {
     return parseInt(match[1].replace(/,/g, ""));
   }
 
-  const budgetRegex = /(?:budget|price).*?\$?(\d{1,2}(?:,\d{3})*)/i;
+  // Match budget/price patterns
+  const budgetRegex = /(?:budget|price).*?\$?(\d{1,4}(?:,\d{3})*)/i;
   const budgetMatch = query.match(budgetRegex);
   if (budgetMatch) {
     return parseInt(budgetMatch[1].replace(/,/g, ""));
+  }
+
+  // Match standalone prices like $3000
+  const standaloneRegex = /\$(\d{1,4}(?:,\d{3})*)/i;
+  const standaloneMatch = query.match(standaloneRegex);
+  if (standaloneMatch) {
+    return parseInt(standaloneMatch[1].replace(/,/g, ""));
   }
 
   return null;

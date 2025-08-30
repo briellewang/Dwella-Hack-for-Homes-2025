@@ -23,6 +23,8 @@ const AISearchPage = ({ setCurrentView }) => {
   const [currentLanguage, setCurrentLanguage] = useState("en");
   const [showLanguageMenu, setShowLanguageMenu] = useState(false);
   const [isVoiceRecording, setIsVoiceRecording] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const [errorData, setErrorData] = useState(null);
 
   // Language configurations
   const languages = {
@@ -399,6 +401,61 @@ const AISearchPage = ({ setCurrentView }) => {
     setShowLanguageMenu(false);
   };
 
+  // Error Modal Component
+  const ErrorModal = ({ isOpen, onClose, errorData }) => {
+    if (!isOpen || !errorData) return null;
+
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div className="bg-white rounded-2xl p-6 max-w-md w-full mx-4 shadow-2xl">
+          <div className="flex items-center mb-4">
+            <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center mr-3">
+              <span className="text-red-600 text-xl">⚠️</span>
+            </div>
+            <h3 className="text-lg font-semibold text-gray-800">Search Error</h3>
+          </div>
+          
+          <div className="mb-4">
+            <p className="text-gray-600 mb-3">{errorData.errors.join(". ")}</p>
+            
+            <div className="bg-gray-50 rounded-lg p-4">
+              <h4 className="font-semibold text-gray-800 mb-2">Available Options:</h4>
+              <div className="space-y-2 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Price Range:</span>
+                  <span className="font-medium text-indigo-600">
+                    ${errorData.dataRanges.minPrice.toLocaleString()} - ${errorData.dataRanges.maxPrice.toLocaleString()}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Bedrooms:</span>
+                  <span className="font-medium text-indigo-600">
+                    {errorData.dataRanges.availableBedrooms.join(", ")}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Locations:</span>
+                  <span className="font-medium text-indigo-600">
+                    {errorData.dataRanges.availableLocations.join(", ")}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="flex space-x-3">
+            <button
+              onClick={onClose}
+              className="flex-1 bg-indigo-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-indigo-700 transition-colors"
+            >
+              Got it
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   // Validate search criteria against available data
   const validateSearchCriteria = (query) => {
     const dataRanges = getDataRanges();
@@ -435,13 +492,8 @@ const AISearchPage = ({ setCurrentView }) => {
     const validation = validateSearchCriteria(inputText);
 
     if (!validation.isValid) {
-      alert(
-        `Search Error: ${validation.errors.join(
-          ". "
-        )}\n\nAvailable options:\n- Price range: $${validation.dataRanges.minPrice.toLocaleString()} - $${validation.dataRanges.maxPrice.toLocaleString()}\n- Bedrooms: ${validation.dataRanges.availableBedrooms.join(
-          ", "
-        )}\n- Locations: ${validation.dataRanges.availableLocations.join(", ")}`
-      );
+      setErrorData(validation);
+      setShowErrorModal(true);
       return;
     }
 
@@ -596,6 +648,13 @@ const AISearchPage = ({ setCurrentView }) => {
 
         <BottomNav currentView="llm-input" setCurrentView={setCurrentView} />
       </div>
+      
+      {/* Error Modal */}
+      <ErrorModal 
+        isOpen={showErrorModal} 
+        onClose={() => setShowErrorModal(false)} 
+        errorData={errorData} 
+      />
     </div>
   );
 };
