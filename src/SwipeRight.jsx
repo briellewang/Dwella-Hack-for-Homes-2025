@@ -300,7 +300,7 @@ const SwipeHomePage = ({ setCurrentView, setSelectedPropertyId }) => {
 
   const handleLike = () => {
     const currentProperties = isFiltered ? filteredProperties : properties;
-    if (currentCard < currentProperties.length - 1) {
+    if (currentCard < currentProperties.length) {
       setCurrentCard(currentCard + 1);
       setCurrentImageIndex(0);
     }
@@ -308,7 +308,7 @@ const SwipeHomePage = ({ setCurrentView, setSelectedPropertyId }) => {
 
   const handleDislike = () => {
     const currentProperties = isFiltered ? filteredProperties : properties;
-    if (currentCard < currentProperties.length - 1) {
+    if (currentCard < currentProperties.length) {
       setCurrentCard(currentCard + 1);
       setCurrentImageIndex(0);
     }
@@ -316,7 +316,7 @@ const SwipeHomePage = ({ setCurrentView, setSelectedPropertyId }) => {
 
   const handleSkip = () => {
     const currentProperties = isFiltered ? filteredProperties : properties;
-    if (currentCard < currentProperties.length - 1) {
+    if (currentCard < currentProperties.length) {
       setCurrentCard(currentCard + 1);
       setCurrentImageIndex(0);
       triggerHapticFeedback(40);
@@ -755,12 +755,12 @@ const SwipeHomePage = ({ setCurrentView, setSelectedPropertyId }) => {
                 <h3 className="text-2xl font-bold text-gray-700 mb-3">
                   {isFiltered
                     ? "No more matching properties"
-                    : "No more properties"}
+                    : "You've seen all available houses."}
                 </h3>
                 <p className="text-gray-500 mb-8 leading-relaxed">
                   {isFiltered
                     ? "Try adjusting your search criteria to find more properties"
-                    : "You've seen all available properties. Check back later for new listings"}
+                    : "Check back later for new listings"}
                 </p>
                 <div className="space-y-4">
                   <button
