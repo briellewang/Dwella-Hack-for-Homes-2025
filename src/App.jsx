@@ -39,7 +39,7 @@ function App() {
       case "property-list":
         return <PropertyListPage setCurrentView={setCurrentView} />;
       case "property-detail":
-        return <PropertyDetailPage propertyId={1} onBack={() => setCurrentView("property-list")} />;
+        return <PropertyDetailPage propertyId={1} setCurrentView={setCurrentView} />;
       case "profile":
         return <ProfilePage setCurrentView={setCurrentView} />;
       case "forum":
