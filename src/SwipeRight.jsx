@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { BottomNav } from "./NavigationBar";
 import {
   Heart,
   X,
@@ -33,7 +34,7 @@ import {
   getDataRanges,
 } from "./data/properties.js";
 
-const SwipeHomePage = ({ setCurrentView }) => {
+const SwipeHomePage = ({ setCurrentView, setSelectedPropertyId }) => {
   const [currentCard, setCurrentCard] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
@@ -138,12 +139,9 @@ const SwipeHomePage = ({ setCurrentView }) => {
     }
   };
 
-  // Convert monthly rent to weekly rent
-  const convertToWeeklyRent = (monthlyPrice) => {
-    const price = monthlyPrice.replace(/[$,]/g, '');
-    const monthlyAmount = parseInt(price);
-    const weeklyAmount = Math.round(monthlyAmount / 4.33); // 52 weeks / 12 months
-    return `$${weeklyAmount.toLocaleString()}/week`;
+  // Display price as is (already in weekly format)
+  const displayPrice = (price) => {
+    return price; // Price is already in weekly format from properties.js
   };
 
   // Get icon for tag
@@ -336,60 +334,7 @@ const SwipeHomePage = ({ setCurrentView }) => {
     localStorage.setItem("tutorialShown", "true");
   };
 
-  // Bottom Navigation Component (适配手机app容器)
-  const BottomNav = ({ currentView, setCurrentView }) => (
-    <div className="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2">
-      <div className="flex justify-around">
-        <button
-          onClick={() => setCurrentView("home")}
-          className={`flex flex-col items-center py-2 px-2 ${
-            currentView === "home" ? "text-purple-600" : "text-gray-400"
-          }`}
-        >
-          <Home className="w-5 h-5 mb-1" />
-          <span className="text-xs">Discover</span>
-        </button>
-        <button
-          onClick={() => setCurrentView("property-list")}
-          className={`flex flex-col items-center py-2 px-2 ${
-            currentView === "property-list"
-              ? "text-purple-600"
-              : "text-gray-400"
-          }`}
-        >
-          <Search className="w-5 h-5 mb-1" />
-          <span className="text-xs">Browse</span>
-        </button>
-        <button
-          onClick={() => setCurrentView("llm-input")}
-          className={`flex flex-col items-center py-2 px-2 ${
-            currentView === "llm-input" ? "text-purple-600" : "text-gray-400"
-          }`}
-        >
-          <MessageCircle className="w-5 h-5 mb-1" />
-          <span className="text-xs">AI Search</span>
-        </button>
-        <button
-          onClick={() => setCurrentView("forum")}
-          className={`flex flex-col items-center py-2 px-2 ${
-            currentView === "forum" ? "text-purple-600" : "text-gray-400"
-          }`}
-        >
-          <Users className="w-5 h-5 mb-1" />
-          <span className="text-xs">Forum</span>
-        </button>
-        <button
-          onClick={() => setCurrentView("profile")}
-          className={`flex flex-col items-center py-2 px-2 ${
-            currentView === "profile" ? "text-purple-600" : "text-gray-400"
-          }`}
-        >
-          <User className="w-5 h-5 mb-1" />
-          <span className="text-xs">Profile</span>
-        </button>
-      </div>
-    </div>
-  );
+
 
   return (
     <div className="min-h-screen bg-gray-50 flex justify-center">
@@ -617,7 +562,7 @@ const SwipeHomePage = ({ setCurrentView }) => {
                     {/* Enhanced Price Tag - Now showing weekly rent */}
                     <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-2xl shadow-lg border border-gray-200">
                       <span className="text-xl font-bold text-purple-600">
-                        {convertToWeeklyRent(getCurrentProperties()[currentCard].price)}
+                        {displayPrice(getCurrentProperties()[currentCard].price)}
                       </span>
                     </div>
 
@@ -699,7 +644,10 @@ const SwipeHomePage = ({ setCurrentView }) => {
                         <X className="w-8 h-8 text-white" />
                       </button>
                       <button
-                        onClick={() => setCurrentView("property-detail")}
+                        onClick={() => {
+                          setSelectedPropertyId(getCurrentProperties()[currentCard].id);
+                          setCurrentView("property-detail");
+                        }}
                         className="w-16 h-16 bg-blue-500 rounded-full shadow-lg flex items-center justify-center hover:shadow-xl transform hover:scale-110 transition-all duration-200"
                       >
                         <MessageCircle className="w-8 h-8 text-white" />
@@ -754,7 +702,7 @@ const SwipeHomePage = ({ setCurrentView }) => {
                       />
                       <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-xl">
                         <span className="text-lg font-bold text-purple-600">
-                          {convertToWeeklyRent(currentProperties[currentCard + 1].price)}
+                          {displayPrice(currentProperties[currentCard + 1].price)}
                         </span>
                       </div>
                     </div>
@@ -787,7 +735,7 @@ const SwipeHomePage = ({ setCurrentView }) => {
                       />
                       <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-xl">
                         <span className="text-lg font-bold text-purple-600">
-                          {convertToWeeklyRent(currentProperties[currentCard + 2].price)}
+                          {displayPrice(currentProperties[currentCard + 2].price)}
                         </span>
                       </div>
                     </div>
