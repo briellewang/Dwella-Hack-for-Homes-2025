@@ -15,7 +15,7 @@ import {
   getDataRanges,
   parsePriceRequirement,
   parseBedroomRequirement,
-} from "@/data/properties.js";
+} from "/src/data/properties.js";
 
 const AISearchPage = ({ setCurrentView }) => {
   const [inputText, setInputText] = useState("");
@@ -603,11 +603,11 @@ const AISearchPage = ({ setCurrentView }) => {
       >
         <div className="p-4 border-b border-gray-200">
           <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-gradient-to-r from-pink-500 to-purple-600 rounded-lg flex items-center justify-center">
-              <Sparkles className="w-5 h-5 text-white" />
-            </div>
-            <div>
+            <div className="flex items-center space-x-3">
+              <div className="w-8 h-8 bg-gradient-to-r from-pink-500 to-purple-600 rounded-lg flex items-center justify-center">
+                <Sparkles className="w-5 h-5 text-white" />
+              </div>
+              <div>
                 <h1 className="text-xl font-semibold">{t.title}</h1>
                 <p className="text-sm text-gray-500">{t.subtitle}</p>
               </div>
@@ -719,9 +719,9 @@ const AISearchPage = ({ setCurrentView }) => {
             <div className="space-y-3 text-sm text-gray-600">
               {t.features.map((feature, index) => (
                 <div key={index} className="flex items-start space-x-2">
-                <div className="w-1.5 h-1.5 bg-purple-500 rounded-full mt-2"></div>
+                  <div className="w-1.5 h-1.5 bg-purple-500 rounded-full mt-2"></div>
                   <span>{feature}</span>
-              </div>
+                </div>
               ))}
             </div>
           </div>
