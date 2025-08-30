@@ -429,7 +429,7 @@ const AISearchPage = ({ setCurrentView }) => {
               </div>
               <div>
                 <h3 className="text-xl font-bold text-gray-800">
-                  🔥 Search Criteria Issue 🔥
+                  Search Criteria Issue
                 </h3>
                 <p className="text-sm text-gray-500">
                   Let's find something that works for you
