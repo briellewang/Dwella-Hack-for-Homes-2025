@@ -11,7 +11,7 @@ import {
   Home,
   User,
 } from "lucide-react";
-import { getLandlordProperties } from "/src/data/properties.js";
+import { getLandlordProperties } from "./data/properties.js";
 
 const LandlordHomePage = ({ setCurrentView }) => {
   const [showApplications, setShowApplications] = useState(false);
