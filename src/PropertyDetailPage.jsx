@@ -14,58 +14,35 @@ import {
   User,
   Clock,
   Eye,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
+import { properties } from "./data/properties.js";
 
 const PropertyDetailPage = ({ propertyId, setCurrentView }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  // Mock property data - in a real app, this would come from props or API
-  const property = {
-    id: propertyId || 1,
-    title: "Modern Studio Apartment",
-    price: "$550/week",
-    location: "Northbridge, Perth",
-    bedrooms: 1,
-    bathrooms: 1,
-    area: "650 sq ft",
-    description: "Beautiful modern studio with great city views. This stunning apartment features floor-to-ceiling windows, modern appliances, and a perfect location in the heart of Northbridge. Walking distance to restaurants, cafes, and public transportation.",
-    features: [
-      "Floor-to-ceiling windows",
-      "Modern appliances",
-      "Built-in wardrobe",
-      "Balcony",
-      "Air conditioning",
-      "High-speed internet",
-      "24/7 security",
-      "Gym access",
-      "Parking available"
-    ],
-    images: [
-      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&h=600&fit=crop",
-      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&h=600&fit=crop",
-      "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800&h=600&fit=crop",
-      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&h=600&fit=crop",
-    ],
-    landlord: {
-      name: "Sarah Johnson",
-      company: "Property Management Solutions",
-      responseTime: "2 hours",
-      verified: true
-    },
-    agent: {
-      name: "Marcus Chen",
-      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
-      company: "Perth Real Estate Group",
-      responseTime: "1 hour",
-      verified: true,
-      experience: "5+ years",
-      specializations: ["Luxury Properties", "Investment Properties", "First-time Buyers"]
-    },
-    availability: "Available Now",
-    listedDate: "2 days ago",
-    views: 245,
-    inquiries: 18
+  // Get property data from unified data source
+  const property = properties.find(p => p.id === propertyId) || properties[0];
+
+  // Mock agent data since it's not in the properties array
+  const agent = {
+    name: "Marcus Chen",
+    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+    company: "Perth Real Estate Group",
+    responseTime: "1 hour",
+    verified: true,
+    experience: "5+ years",
+    specializations: ["Luxury Properties", "Investment Properties", "First-time Buyers"]
+  };
+
+  // Mock landlord data since it's not in the properties array
+  const landlord = {
+    name: "Sarah Johnson",
+    company: "Property Management Solutions",
+    responseTime: "2 hours",
+    verified: true
   };
 
   const nextImage = () => {
@@ -81,7 +58,9 @@ const PropertyDetailPage = ({ propertyId, setCurrentView }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 flex justify-center">
+      {/* Mobile App Container */}
+      <div className="w-full max-w-sm bg-white shadow-2xl relative overflow-hidden" style={{ height: "100vh" }}>
       {/* Header */}
       <div className="bg-white shadow-sm">
         <div className="flex items-center justify-between p-4">
@@ -120,39 +99,31 @@ const PropertyDetailPage = ({ propertyId, setCurrentView }) => {
           {/* Image Navigation */}
           <button
             onClick={prevImage}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70"
+            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/80 backdrop-blur-sm rounded-full p-2 hover:bg-white transition-colors"
           >
-            <ArrowLeft className="w-4 h-4" />
+            <ChevronLeft className="w-5 h-5 text-gray-700" />
           </button>
           <button
             onClick={nextImage}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70"
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/80 backdrop-blur-sm rounded-full p-2 hover:bg-white transition-colors"
           >
-            <ArrowLeft className="w-4 h-4 rotate-180" />
+            <ChevronRight className="w-5 h-5 text-gray-700" />
           </button>
 
-          {/* Image Indicators */}
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-            {property.images.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentImageIndex(index)}
-                className={`w-2 h-2 rounded-full ${
-                  index === currentImageIndex ? "bg-white" : "bg-white/50"
-                }`}
-              />
-            ))}
+          {/* Image Counter */}
+          <div className="absolute bottom-4 right-4 bg-black/50 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm">
+            {currentImageIndex + 1} / {property.images.length}
           </div>
         </div>
 
-        {/* Thumbnail Images */}
-        <div className="flex space-x-2 p-4 overflow-x-auto">
+        {/* Image Thumbnails */}
+        <div className="p-4 flex space-x-2 overflow-x-auto">
           {property.images.map((image, index) => (
             <button
               key={index}
               onClick={() => setCurrentImageIndex(index)}
               className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 ${
-                index === currentImageIndex ? "border-indigo-500" : "border-gray-200"
+                index === currentImageIndex ? "border-blue-500" : "border-gray-200"
               }`}
             >
               <img
@@ -165,210 +136,133 @@ const PropertyDetailPage = ({ propertyId, setCurrentView }) => {
         </div>
       </div>
 
-      {/* Property Info */}
-      <div className="p-4 space-y-6">
-        {/* Title and Price */}
+      {/* Property Details */}
+      <div className="p-6 space-y-6 overflow-y-auto pb-20" style={{ height: "calc(100vh - 80px)" }}>
+        {/* Header Info */}
         <div>
-          <h1 className="text-2xl font-bold text-gray-800 mb-2">
-            {property.title}
-          </h1>
-          <div className="flex items-center justify-between">
-            <div className="text-3xl font-bold text-indigo-600">
-              {property.price}
-            </div>
-            <div className="flex items-center space-x-4 text-sm text-gray-500">
-              <span className="flex items-center">
-                <Eye className="w-4 h-4 mr-1" />
-                {property.views} views
-              </span>
-              <span className="flex items-center">
-                <MessageSquare className="w-4 h-4 mr-1" />
-                {property.inquiries} inquiries
-              </span>
-            </div>
+          <h1 className="text-2xl font-bold text-gray-800 mb-2">{property.title}</h1>
+          <div className="flex items-center text-gray-600 mb-3">
+            <MapPin className="w-4 h-4 mr-1" />
+            <span>{property.location}</span>
           </div>
+          <div className="text-3xl font-bold text-blue-600 mb-4">{property.price}</div>
         </div>
 
-        {/* Location */}
-        <div className="flex items-center text-gray-600">
-          <MapPin className="w-5 h-5 mr-2" />
-          <span>{property.location}</span>
-        </div>
-
-        {/* Key Details */}
-        <div className="grid grid-cols-3 gap-4 py-4 border-t border-b border-gray-200">
-          <div className="text-center">
-            <div className="flex items-center justify-center mb-1">
-              <Bed className="w-5 h-5 text-gray-400" />
-            </div>
-            <div className="text-lg font-semibold text-gray-800">
-              {property.bedrooms}
-            </div>
-            <div className="text-sm text-gray-500">Bedrooms</div>
+        {/* Key Features */}
+        <div className="flex items-center justify-between bg-gray-50 rounded-xl p-4">
+          <div className="flex items-center space-x-1">
+            <Bed className="w-5 h-5 text-gray-600" />
+            <span className="text-gray-700">{property.bedrooms} bed</span>
           </div>
-          <div className="text-center">
-            <div className="flex items-center justify-center mb-1">
-              <Bath className="w-5 h-5 text-gray-400" />
-            </div>
-            <div className="text-lg font-semibold text-gray-800">
-              {property.bathrooms}
-            </div>
-            <div className="text-sm text-gray-500">Bathrooms</div>
+          <div className="flex items-center space-x-1">
+            <Bath className="w-5 h-5 text-gray-600" />
+            <span className="text-gray-700">{property.bathrooms} bath</span>
           </div>
-          <div className="text-center">
-            <div className="flex items-center justify-center mb-1">
-              <Square className="w-5 h-5 text-gray-400" />
-            </div>
-            <div className="text-lg font-semibold text-gray-800">
-              {property.area}
-            </div>
-            <div className="text-sm text-gray-500">Area</div>
+          <div className="flex items-center space-x-1">
+            <Square className="w-5 h-5 text-gray-600" />
+            <span className="text-gray-700">{property.area}</span>
           </div>
-        </div>
-
-        {/* Availability */}
-        <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg">
-          <div className="flex items-center">
-            <Calendar className="w-5 h-5 text-green-600 mr-2" />
-            <span className="text-green-700 font-medium">
-              {property.availability}
-            </span>
-          </div>
-          <span className="text-sm text-green-600">
-            Listed {property.listedDate}
-          </span>
         </div>
 
         {/* Description */}
         <div>
-          <h3 className="text-lg font-semibold text-gray-800 mb-3">
-            Description
-          </h3>
-          <p className="text-gray-600 leading-relaxed">
-            {property.description}
-          </p>
+          <h3 className="text-lg font-semibold text-gray-800 mb-3">Description</h3>
+          <p className="text-gray-600 leading-relaxed">{property.description}</p>
         </div>
 
         {/* Features */}
         <div>
-          <h3 className="text-lg font-semibold text-gray-800 mb-3">
-            Features
-          </h3>
+          <h3 className="text-lg font-semibold text-gray-800 mb-3">Features</h3>
           <div className="grid grid-cols-2 gap-2">
             {property.features.map((feature, index) => (
-              <div key={index} className="flex items-center text-gray-600">
-                <div className="w-2 h-2 bg-indigo-500 rounded-full mr-3"></div>
+              <div key={index} className="flex items-center space-x-2 text-gray-600">
+                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                 <span className="text-sm">{feature}</span>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Landlord/Agent Info */}
-        <div className="bg-gray-50 rounded-lg p-4">
-          <h3 className="text-lg font-semibold text-gray-800 mb-3">
-            Landlord/Agent
-          </h3>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center">
-                <User className="w-6 h-6 text-indigo-600" />
-              </div>
-              <div>
-                <div className="font-medium text-gray-800">
-                  {property.landlord.name}
-                </div>
-                <div className="text-sm text-gray-600">
-                  {property.landlord.company}
-                </div>
-              </div>
-            </div>
-            <div className="text-right">
-              <div className="text-sm text-gray-500">Response time</div>
-              <div className="flex items-center text-sm text-gray-600">
-                <Clock className="w-4 h-4 mr-1" />
-                {property.landlord.responseTime}
+        {/* Landlord/Agent Section */}
+        <div className="bg-gray-50 rounded-xl p-4">
+          <h3 className="text-lg font-semibold text-gray-800 mb-3">Landlord/Agent</h3>
+          <div className="flex items-center space-x-3">
+            <img
+              src={agent.avatar}
+              alt={agent.name}
+              className="w-12 h-12 rounded-full object-cover"
+            />
+            <div className="flex-1">
+              <h4 className="font-semibold text-gray-800">{agent.name}</h4>
+              <p className="text-sm text-gray-600">{agent.company}</p>
+              <div className="flex items-center space-x-4 mt-1">
+                <span className="text-xs text-gray-500">Response: {agent.responseTime}</span>
+                {agent.verified && (
+                  <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">
+                    Verified
+                  </span>
+                )}
               </div>
             </div>
           </div>
         </div>
 
-        {/* Agent Info */}
-        <div className="bg-white rounded-lg p-4 border border-gray-200">
-          <h3 className="text-lg font-semibold text-gray-800 mb-3">
-            Listing Agent
-          </h3>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <img
-                src={property.agent.avatar}
-                alt={property.agent.name}
-                className="w-12 h-12 rounded-full object-cover"
-              />
-              <div>
-                <div className="font-medium text-gray-800">
-                  {property.agent.name}
-                </div>
-                <div className="text-sm text-gray-600">
-                  {property.agent.company}
-                </div>
-                <div className="text-xs text-gray-500 mt-1">
-                  {property.agent.experience} experience
-                </div>
+        {/* Listing Agent Section */}
+        <div className="bg-gray-50 rounded-xl p-4">
+          <h3 className="text-lg font-semibold text-gray-800 mb-3">Listing Agent</h3>
+          <div className="flex items-center space-x-3">
+            <img
+              src={agent.avatar}
+              alt={agent.name}
+              className="w-12 h-12 rounded-full object-cover"
+            />
+            <div className="flex-1">
+              <h4 className="font-semibold text-gray-800">{agent.name}</h4>
+              <p className="text-sm text-gray-600">{agent.company}</p>
+              <div className="flex items-center space-x-4 mt-1">
+                <span className="text-xs text-gray-500">Response: {agent.responseTime}</span>
+                {agent.verified && (
+                  <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">
+                    Verified
+                  </span>
+                )}
               </div>
-            </div>
-            <div className="text-right">
-              <div className="text-sm text-gray-500">Response time</div>
-              <div className="flex items-center text-sm text-gray-600">
-                <Clock className="w-4 h-4 mr-1" />
-                {property.agent.responseTime}
+              <div className="mt-2">
+                <p className="text-xs text-gray-500">Experience: {agent.experience}</p>
+                <p className="text-xs text-gray-500">Specializations: {agent.specializations.join(", ")}</p>
               </div>
             </div>
           </div>
-          
-          {/* Agent Specializations */}
-          <div className="mt-3 pt-3 border-t border-gray-100">
-            <div className="text-sm text-gray-500 mb-2">Specializations:</div>
-            <div className="flex flex-wrap gap-2">
-              {property.agent.specializations.map((spec, index) => (
-                <span
-                  key={index}
-                  className="px-2 py-1 bg-indigo-50 text-indigo-600 text-xs rounded-full"
-                >
-                  {spec}
-                </span>
-              ))}
-            </div>
+        </div>
+
+        {/* Property Stats */}
+        <div className="grid grid-cols-3 gap-4">
+          <div className="text-center">
+            <div className="text-2xl font-bold text-blue-600">245</div>
+            <div className="text-sm text-gray-500">Views</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-blue-600">18</div>
+            <div className="text-sm text-gray-500">Inquiries</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-blue-600">2</div>
+            <div className="text-sm text-gray-500">Days Listed</div>
           </div>
         </div>
       </div>
 
-      {/* Action Buttons */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4">
+      {/* Bottom Action Buttons */}
+      <div className="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4">
         <div className="flex space-x-3">
-          <button
-            onClick={() => setIsFavorite(!isFavorite)}
-            className={`flex-1 py-3 px-4 rounded-lg font-medium transition-colors flex items-center justify-center gap-2 ${
-              isFavorite
-                ? "bg-red-50 text-red-600 border border-red-200"
-                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-            }`}
-          >
-            <Heart className={`w-5 h-5 ${isFavorite ? "fill-current" : ""}`} />
-            {isFavorite ? "Favorited" : "Add to Favorites"}
+          <button className="flex-1 bg-gray-100 text-gray-700 py-3 px-4 rounded-xl font-semibold hover:bg-gray-200 transition-colors">
+            Message
           </button>
-
-          <button
-            onClick={() => {
-              // Handle call functionality
-              window.open(`tel:+61412345678`, '_self');
-            }}
-            className="flex-1 bg-indigo-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-indigo-700 transition-colors flex items-center justify-center gap-2"
-          >
-            <Phone className="w-5 h-5" />
-            Call Now
+          <button className="flex-1 bg-blue-600 text-white py-3 px-4 rounded-xl font-semibold hover:bg-blue-700 transition-colors">
+            Book Inspection
           </button>
         </div>
+      </div>
       </div>
     </div>
   );

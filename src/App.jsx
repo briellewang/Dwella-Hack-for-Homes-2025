@@ -35,11 +35,11 @@ function App() {
       case "add-property":
         return <AddPropertyPage setCurrentView={setCurrentView} />;
       case "home":
-        return <SwipeRight setCurrentView={setCurrentView} />;
+        return <SwipeRight setCurrentView={setCurrentView} setSelectedPropertyId={setSelectedPropertyId} />;
       case "property-list":
-        return <PropertyListPage setCurrentView={setCurrentView} />;
+        return <PropertyListPage setCurrentView={setCurrentView} setSelectedPropertyId={setSelectedPropertyId} />;
       case "property-detail":
-        return <PropertyDetailPage propertyId={1} setCurrentView={setCurrentView} />;
+        return <PropertyDetailPage propertyId={selectedPropertyId} setCurrentView={setCurrentView} />;
       case "profile":
         return <ProfilePage setCurrentView={setCurrentView} />;
       case "forum":

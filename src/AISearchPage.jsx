@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { BottomNav } from "./NavigationBar";
 import {
   MessageCircle,
   Send,
@@ -324,60 +325,7 @@ const AISearchPage = ({ setCurrentView }) => {
 
   const t = translations[currentLanguage];
 
-  // Bottom Navigation Component (Mobile app container)
-  const BottomNav = ({ currentView, setCurrentView }) => (
-    <div className="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2">
-      <div className="flex justify-around">
-        <button
-          onClick={() => setCurrentView("home")}
-          className={`flex flex-col items-center py-2 px-2 ${
-            currentView === "home" ? "text-purple-600" : "text-gray-400"
-          }`}
-        >
-          <Home className="w-5 h-5 mb-1" />
-          <span className="text-xs">Discover</span>
-        </button>
-        <button
-          onClick={() => setCurrentView("property-list")}
-          className={`flex flex-col items-center py-2 px-2 ${
-            currentView === "property-list"
-              ? "text-purple-600"
-              : "text-gray-400"
-          }`}
-        >
-          <Search className="w-5 h-5 mb-1" />
-          <span className="text-xs">Browse</span>
-        </button>
-        <button
-          onClick={() => setCurrentView("llm-input")}
-          className={`flex flex-col items-center py-2 px-2 ${
-            currentView === "llm-input" ? "text-purple-600" : "text-gray-400"
-          }`}
-        >
-          <MessageCircle className="w-5 h-5 mb-1" />
-          <span className="text-xs">AI Search</span>
-        </button>
-        <button
-          onClick={() => setCurrentView("forum")}
-          className={`flex flex-col items-center py-2 px-2 ${
-            currentView === "forum" ? "text-purple-600" : "text-gray-400"
-          }`}
-        >
-          <Users className="w-5 h-5 mb-1" />
-          <span className="text-xs">Forum</span>
-        </button>
-        <button
-          onClick={() => setCurrentView("profile")}
-          className={`flex flex-col items-center py-2 px-2 ${
-            currentView === "profile" ? "text-purple-600" : "text-gray-400"
-          }`}
-        >
-          <User className="w-5 h-5 mb-1" />
-          <span className="text-xs">Profile</span>
-        </button>
-      </div>
-    </div>
-  );
+
 
   // Handle voice input simulation
   const handleVoiceInput = () => {
@@ -648,7 +596,7 @@ const AISearchPage = ({ setCurrentView }) => {
           </div>
         </div>
 
-        <div className="p-4 flex-1 pb-32">
+        <div className="p-4 flex-1 pb-32 overflow-y-auto" style={{ height: "calc(100vh - 140px)" }}>
           <div className="mb-6">
             <div className="relative">
               <textarea
