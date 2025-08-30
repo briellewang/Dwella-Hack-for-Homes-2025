@@ -406,49 +406,101 @@ const AISearchPage = ({ setCurrentView }) => {
     if (!isOpen || !errorData) return null;
 
     return (
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-        <div className="bg-white rounded-2xl p-6 max-w-md w-full mx-4 shadow-2xl">
-          <div className="flex items-center mb-4">
-            <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center mr-3">
-              <span className="text-red-600 text-xl">⚠️</span>
+      <div className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fadeIn">
+        <div className="bg-white rounded-3xl p-8 max-w-lg w-full mx-4 shadow-2xl border border-gray-100 animate-slideUp">
+          {/* Header with gradient background */}
+          <div className="relative mb-6">
+            <div className="absolute inset-0 bg-gradient-to-r from-red-500 to-orange-500 rounded-2xl opacity-10"></div>
+            <div className="relative flex items-center">
+              <div className="w-14 h-14 bg-gradient-to-r from-red-500 to-orange-500 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
+                <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-gray-800">Search Criteria Issue</h3>
+                <p className="text-sm text-gray-500">Let's find something that works for you</p>
+              </div>
             </div>
-            <h3 className="text-lg font-semibold text-gray-800">Search Error</h3>
           </div>
-          
-          <div className="mb-4">
-            <p className="text-gray-600 mb-3">{errorData.errors.join(". ")}</p>
+
+          {/* Error message */}
+          <div className="mb-6">
+            <div className="bg-red-50 border-l-4 border-red-400 p-4 rounded-r-lg">
+              <p className="text-red-800 font-medium">{errorData.errors.join(". ")}</p>
+            </div>
+          </div>
+
+          {/* Available options with beautiful cards */}
+          <div className="mb-6">
+            <h4 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+              <span className="w-2 h-2 bg-indigo-500 rounded-full mr-2"></span>
+              Available Options
+            </h4>
             
-            <div className="bg-gray-50 rounded-lg p-4">
-              <h4 className="font-semibold text-gray-800 mb-2">Available Options:</h4>
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Price Range:</span>
-                  <span className="font-medium text-indigo-600">
+            <div className="grid gap-3">
+              {/* Price Range Card */}
+              <div className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl p-4 border border-indigo-100">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <div className="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center mr-3">
+                      <span className="text-indigo-600 text-sm">💰</span>
+                    </div>
+                    <span className="font-medium text-gray-700">Price Range</span>
+                  </div>
+                  <span className="font-bold text-indigo-600 text-lg">
                     ${errorData.dataRanges.minPrice.toLocaleString()} - ${errorData.dataRanges.maxPrice.toLocaleString()}
                   </span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Bedrooms:</span>
-                  <span className="font-medium text-indigo-600">
-                    {errorData.dataRanges.availableBedrooms.join(", ")}
-                  </span>
+              </div>
+
+              {/* Bedrooms Card */}
+              <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-4 border border-green-100">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center mr-3">
+                      <span className="text-green-600 text-sm">🏠</span>
+                    </div>
+                    <span className="font-medium text-gray-700">Bedrooms</span>
+                  </div>
+                  <div className="flex space-x-1">
+                    {errorData.dataRanges.availableBedrooms.map((bedroom, index) => (
+                      <span key={index} className="bg-green-200 text-green-800 px-2 py-1 rounded-lg text-sm font-medium">
+                        {bedroom}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Locations:</span>
-                  <span className="font-medium text-indigo-600">
-                    {errorData.dataRanges.availableLocations.join(", ")}
-                  </span>
+              </div>
+
+              {/* Locations Card */}
+              <div className="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl p-4 border border-blue-100">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                      <span className="text-blue-600 text-sm">📍</span>
+                    </div>
+                    <span className="font-medium text-gray-700">Locations</span>
+                  </div>
+                  <div className="text-right">
+                    {errorData.dataRanges.availableLocations.map((location, index) => (
+                      <div key={index} className="text-blue-600 font-medium text-sm">
+                        {location}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          
+
+          {/* Action buttons */}
           <div className="flex space-x-3">
             <button
               onClick={onClose}
-              className="flex-1 bg-indigo-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-indigo-700 transition-colors"
+              className="flex-1 bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-3 px-6 rounded-xl font-semibold hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
             >
-              Got it
+              Got it, thanks!
             </button>
           </div>
         </div>
@@ -648,12 +700,12 @@ const AISearchPage = ({ setCurrentView }) => {
 
         <BottomNav currentView="llm-input" setCurrentView={setCurrentView} />
       </div>
-      
+
       {/* Error Modal */}
-      <ErrorModal 
-        isOpen={showErrorModal} 
-        onClose={() => setShowErrorModal(false)} 
-        errorData={errorData} 
+      <ErrorModal
+        isOpen={showErrorModal}
+        onClose={() => setShowErrorModal(false)}
+        errorData={errorData}
       />
     </div>
   );
