@@ -11,6 +11,7 @@ import {
   Home,
   User,
 } from "lucide-react";
+import { getLandlordProperties } from "../data/properties";
 
 const LandlordHomePage = ({ setCurrentView }) => {
   // Landlord Bottom Navigation Component (inline)
@@ -63,104 +64,8 @@ const LandlordHomePage = ({ setCurrentView }) => {
       </div>
     </div>
   );
-  // Sample property data with multiple images
-  const properties = [
-    {
-      id: 1,
-      title: "Modern Studio Apartment",
-      price: "$2,200/month",
-      location: "Manhattan, NYC",
-      bedrooms: 1,
-      bathrooms: 1,
-      area: "650 sq ft",
-      images: [
-        "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400&h=300&fit=crop",
-        "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&h=300&fit=crop",
-        "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=400&h=300&fit=crop",
-      ],
-      status: "rented",
-      tenant: "Sarah Johnson",
-      views: 245,
-      inquiries: 18,
-      monthlyRevenue: 2200,
-    },
-    {
-      id: 2,
-      title: "Cozy 2-Bedroom Loft",
-      price: "$3,200/month",
-      location: "Brooklyn, NYC",
-      bedrooms: 2,
-      bathrooms: 1,
-      area: "950 sq ft",
-      images: [
-        "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&h=300&fit=crop",
-        "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400&h=300&fit=crop",
-        "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=400&h=300&fit=crop",
-      ],
-      status: "available",
-      tenant: null,
-      views: 156,
-      inquiries: 12,
-      monthlyRevenue: 0,
-    },
-    {
-      id: 3,
-      title: "Luxury 3-Bedroom Penthouse",
-      price: "$8,500/month",
-      location: "Upper East Side, NYC",
-      bedrooms: 3,
-      bathrooms: 2,
-      area: "1,800 sq ft",
-      images: [
-        "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=400&h=300&fit=crop",
-        "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400&h=300&fit=crop",
-        "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&h=300&fit=crop",
-      ],
-      status: "rented",
-      tenant: "Mike & Lisa Chen",
-      views: 892,
-      inquiries: 45,
-      monthlyRevenue: 8500,
-    },
-    {
-      id: 4,
-      title: "Bright 1-Bedroom Apartment",
-      price: "$2,800/month",
-      location: "Queens, NYC",
-      bedrooms: 1,
-      bathrooms: 1,
-      area: "750 sq ft",
-      images: [
-        "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400&h=300&fit=crop",
-        "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=400&h=300&fit=crop",
-        "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400&h=300&fit=crop",
-      ],
-      status: "available",
-      tenant: null,
-      views: 203,
-      inquiries: 8,
-      monthlyRevenue: 0,
-    },
-    {
-      id: 5,
-      title: "Spacious Family Townhouse",
-      price: "$5,500/month",
-      location: "Staten Island, NYC",
-      bedrooms: 4,
-      bathrooms: 3,
-      area: "2,200 sq ft",
-      images: [
-        "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=400&h=300&fit=crop",
-        "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400&h=300&fit=crop",
-        "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&h=300&fit=crop",
-      ],
-      status: "rented",
-      tenant: "The Rodriguez Family",
-      views: 634,
-      inquiries: 28,
-      monthlyRevenue: 5500,
-    },
-  ];
+  // Get properties for landlord view
+  const properties = getLandlordProperties();
 
   const totalRevenue = properties.reduce(
     (sum, property) => sum + property.monthlyRevenue,

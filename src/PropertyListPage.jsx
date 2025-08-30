@@ -11,119 +11,14 @@ import {
   Filter,
   SortAsc,
 } from "lucide-react";
+import { getFavoriteProperties } from "../data/properties";
 
 const PropertyListPage = ({ setCurrentView }) => {
   const [likedProperties, setLikedProperties] = useState(new Set());
   const [sortBy, setSortBy] = useState("price");
 
-  // Your favorite properties list
-  const favoriteProperties = [
-    {
-      id: 1,
-      title: "Modern Studio Apartment",
-      price: "$2,200/month",
-      location: "Manhattan, NYC",
-      bedrooms: 1,
-      bathrooms: 1,
-      area: "650 sq ft",
-      images: [
-        "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400&h=300&fit=crop",
-        "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&h=300&fit=crop",
-        "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=400&h=300&fit=crop",
-      ],
-      rating: 4.8,
-      description:
-        "Beautiful modern studio with great city views and excellent transportation links",
-      features: ["5 min to subway", "24/7 security", "Free WiFi", "Gym access"],
-      isLiked: true,
-    },
-    {
-      id: 2,
-      title: "Cozy 2-Bedroom Loft",
-      price: "$3,200/month",
-      location: "Brooklyn, NYC",
-      bedrooms: 2,
-      bathrooms: 1,
-      area: "950 sq ft",
-      images: [
-        "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&h=300&fit=crop",
-        "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400&h=300&fit=crop",
-        "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=400&h=300&fit=crop",
-      ],
-      rating: 4.6,
-      description:
-        "Charming loft with exposed brick walls and industrial design elements",
-      features: [
-        "Exposed brick",
-        "High ceilings",
-        "Parking space",
-        "Pet friendly",
-      ],
-      isLiked: true,
-    },
-    {
-      id: 3,
-      title: "Luxury 3-Bedroom Penthouse",
-      price: "$8,500/month",
-      location: "Upper East Side, NYC",
-      bedrooms: 3,
-      bathrooms: 2,
-      area: "1,800 sq ft",
-      images: [
-        "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=400&h=300&fit=crop",
-        "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400&h=300&fit=crop",
-        "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&h=300&fit=crop",
-      ],
-      rating: 4.9,
-      description:
-        "Stunning penthouse with panoramic city views and premium amenities",
-      features: ["City views", "Doorman", "Gym", "Pool", "Rooftop access"],
-      isLiked: true,
-    },
-    {
-      id: 4,
-      title: "Bright 1-Bedroom Apartment",
-      price: "$2,800/month",
-      location: "Queens, NYC",
-      bedrooms: 1,
-      bathrooms: 1,
-      area: "750 sq ft",
-      images: [
-        "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400&h=300&fit=crop",
-        "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=400&h=300&fit=crop",
-        "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400&h=300&fit=crop",
-      ],
-      rating: 4.5,
-      description:
-        "Sunny apartment with large windows and modern kitchen appliances",
-      features: [
-        "Large windows",
-        "Private balcony",
-        "Smart locks",
-        "Laundry in unit",
-      ],
-      isLiked: true,
-    },
-    {
-      id: 5,
-      title: "Spacious Family Townhouse",
-      price: "$5,500/month",
-      location: "Staten Island, NYC",
-      bedrooms: 4,
-      bathrooms: 3,
-      area: "2,200 sq ft",
-      images: [
-        "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=400&h=300&fit=crop",
-        "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400&h=300&fit=crop",
-        "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&h=300&fit=crop",
-      ],
-      rating: 4.7,
-      description:
-        "Perfect family home with backyard, garage, and quiet neighborhood",
-      features: ["Backyard", "Garage", "Quiet street", "Good schools nearby"],
-      isLiked: true,
-    },
-  ];
+  // Get favorite properties from unified data source
+  const favoriteProperties = getFavoriteProperties();
 
   const toggleLike = (propertyId) => {
     setLikedProperties((prev) => {
@@ -214,11 +109,16 @@ const PropertyListPage = ({ setCurrentView }) => {
   return (
     <div className="min-h-screen bg-gray-50 flex justify-center">
       {/* Mobile App Container */}
-      <div className="w-full max-w-sm bg-white shadow-2xl relative overflow-hidden" style={{ height: '100vh' }}>
+      <div
+        className="w-full max-w-sm bg-white shadow-2xl relative overflow-hidden"
+        style={{ height: "100vh" }}
+      >
         {/* Header */}
         <div className="bg-white border-b border-gray-200 px-4 py-4">
           <div className="flex items-center justify-between mb-4">
-            <h1 className="text-2xl font-bold text-gray-800">Browse Properties</h1>
+            <h1 className="text-2xl font-bold text-gray-800">
+              Browse Properties
+            </h1>
             <button
               onClick={() => setCurrentView("filter")}
               className="p-2 bg-gray-100 rounded-full hover:bg-gray-200"
@@ -263,7 +163,10 @@ const PropertyListPage = ({ setCurrentView }) => {
         </div>
 
         {/* Property List */}
-        <div className="flex-1 overflow-y-auto pb-20" style={{ height: 'calc(100vh - 140px)' }}>
+        <div
+          className="flex-1 overflow-y-auto pb-20"
+          style={{ height: "calc(100vh - 140px)" }}
+        >
           <div className="p-4 space-y-4">
             {sortedProperties.map((property) => (
               <div
@@ -308,7 +211,9 @@ const PropertyListPage = ({ setCurrentView }) => {
                     </h3>
                     <div className="flex items-center">
                       <Star className="w-4 h-4 text-yellow-400 fill-yellow-400 mr-1" />
-                      <span className="text-sm text-gray-600">{property.rating}</span>
+                      <span className="text-sm text-gray-600">
+                        {property.rating}
+                      </span>
                     </div>
                   </div>
 
@@ -346,7 +251,10 @@ const PropertyListPage = ({ setCurrentView }) => {
         </div>
 
         {/* Bottom Navigation */}
-        <BottomNav currentView="property-list" setCurrentView={setCurrentView} />
+        <BottomNav
+          currentView="property-list"
+          setCurrentView={setCurrentView}
+        />
       </div>
     </div>
   );
