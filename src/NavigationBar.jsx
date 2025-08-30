@@ -11,7 +11,7 @@ import {
 
 // Bottom Navigation for Tenants
 export const BottomNav = ({ currentView, setCurrentView }) => (
-  <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2">
+  <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2 z-50">
     <div className="flex justify-around">
       <button
         onClick={() => setCurrentView("home")}
@@ -64,7 +64,7 @@ export const BottomNav = ({ currentView, setCurrentView }) => (
 
 // Bottom Navigation for Landlords
 export const LandlordBottomNav = ({ currentView, setCurrentView }) => (
-  <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2">
+  <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2 z-50">
     <div className="flex justify-around">
       <button
         onClick={() => setCurrentView("landlord-home")}

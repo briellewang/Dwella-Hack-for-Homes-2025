@@ -1,4 +1,5 @@
 import React from "react";
+import { BottomNav } from "./NavigationBar";
 import {
   Settings,
   Heart,
@@ -19,60 +20,6 @@ import {
 } from "lucide-react";
 
 const ProfilePage = ({ setCurrentView }) => {
-  // Bottom Navigation Component (适配手机app容器)
-  const BottomNav = ({ currentView, setCurrentView }) => (
-    <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2">
-      <div className="flex justify-around">
-        <button
-          onClick={() => setCurrentView("home")}
-          className={`flex flex-col items-center py-2 px-2 ${
-            currentView === "home" ? "text-purple-600" : "text-gray-400"
-          }`}
-        >
-          <Home className="w-5 h-5 mb-1" />
-          <span className="text-xs">Discover</span>
-        </button>
-        <button
-          onClick={() => setCurrentView("property-list")}
-          className={`flex flex-col items-center py-2 px-2 ${
-            currentView === "property-list"
-              ? "text-purple-600"
-              : "text-gray-400"
-          }`}
-        >
-          <Search className="w-5 h-5 mb-1" />
-          <span className="text-xs">Browse</span>
-        </button>
-        <button
-          onClick={() => setCurrentView("llm-input")}
-          className={`flex flex-col items-center py-2 px-2 ${
-            currentView === "llm-input" ? "text-purple-600" : "text-gray-400"
-          }`}
-        >
-          <MessageCircle className="w-5 h-5 mb-1" />
-          <span className="text-xs">AI Search</span>
-        </button>
-        <button
-          onClick={() => setCurrentView("forum")}
-          className={`flex flex-col items-center py-2 px-2 ${
-            currentView === "forum" ? "text-purple-600" : "text-gray-400"
-          }`}
-        >
-          <Users className="w-5 h-5 mb-1" />
-          <span className="text-xs">Forum</span>
-        </button>
-        <button
-          onClick={() => setCurrentView("profile")}
-          className={`flex flex-col items-center py-2 px-2 ${
-            currentView === "profile" ? "text-purple-600" : "text-gray-400"
-          }`}
-        >
-          <User className="w-5 h-5 mb-1" />
-          <span className="text-xs">Profile</span>
-        </button>
-      </div>
-    </div>
-  );
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -119,7 +66,7 @@ const ProfilePage = ({ setCurrentView }) => {
           <div className="space-y-3">
             <div className="flex justify-between items-center">
               <span className="text-gray-600">Phone Number</span>
-              <span className="font-medium">+61 4XX XXX XXX</span>
+              <span className="font-medium">+61 0xxx xxx xxx</span>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-gray-600">Email</span>
@@ -131,7 +78,7 @@ const ProfilePage = ({ setCurrentView }) => {
             </div>
             <div className="flex justify-between items-center">
               <span className="text-gray-600">Budget Range</span>
-              <span className="font-medium">$600 - $700</span>
+              <span className="font-medium">$300-$600/per week</span>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-gray-600">Verification Status</span>
@@ -152,6 +99,32 @@ const ProfilePage = ({ setCurrentView }) => {
               <div className="flex items-center">
                 <Heart className="w-5 h-5 text-pink-500 mr-3" />
                 <span>Saved Properties</span>
+              </div>
+              <div className="flex items-center">
+                <span className="text-sm text-gray-500 mr-2">5 items</span>
+                <ChevronRight className="w-4 h-4 text-gray-400" />
+              </div>
+            </button>
+
+            <button className="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors">
+              <div className="flex items-center">
+                <Clock className="w-5 h-5 text-blue-500 mr-3" />
+                <span>Application History</span>
+              </div>
+              <div className="flex items-center">
+                <span className="text-sm text-gray-500 mr-2">3 active</span>
+                <ChevronRight className="w-4 h-4 text-gray-400" />
+              </div>
+            </button>
+
+            <button className="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors">
+              <div className="flex items-center">
+                <FileText className="w-5 h-5 text-green-500 mr-3" />
+                <span>Documents</span>
+              </div>
+              <div className="flex items-center">
+                <span className="text-sm text-gray-500 mr-2">5 uploaded</span>
+                <ChevronRight className="w-4 h-4 text-gray-400" />
               </div>
             </button>
           </div>
