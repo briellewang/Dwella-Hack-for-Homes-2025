@@ -407,19 +407,33 @@ const AISearchPage = ({ setCurrentView }) => {
 
     return (
       <div className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fadeIn">
-        <div className="bg-white rounded-3xl p-8 max-w-lg w-full mx-4 shadow-2xl border border-gray-100 animate-slideUp">
+        <div className="bg-white rounded-3xl p-8 max-w-lg w-full mx-4 shadow-2xl border border-gray-100 animate-slideUp transform">
           {/* Header with gradient background */}
           <div className="relative mb-6">
             <div className="absolute inset-0 bg-gradient-to-r from-red-500 to-orange-500 rounded-2xl opacity-10"></div>
             <div className="relative flex items-center">
               <div className="w-14 h-14 bg-gradient-to-r from-red-500 to-orange-500 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
-                <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                <svg
+                  className="w-7 h-7 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"
+                  />
                 </svg>
               </div>
               <div>
-                <h3 className="text-xl font-bold text-gray-800">Search Criteria Issue</h3>
-                <p className="text-sm text-gray-500">Let's find something that works for you</p>
+                <h3 className="text-xl font-bold text-gray-800">
+                  🔥 Search Criteria Issue 🔥
+                </h3>
+                <p className="text-sm text-gray-500">
+                  Let's find something that works for you
+                </p>
               </div>
             </div>
           </div>
@@ -427,7 +441,9 @@ const AISearchPage = ({ setCurrentView }) => {
           {/* Error message */}
           <div className="mb-6">
             <div className="bg-red-50 border-l-4 border-red-400 p-4 rounded-r-lg">
-              <p className="text-red-800 font-medium">{errorData.errors.join(". ")}</p>
+              <p className="text-red-800 font-medium">
+                {errorData.errors.join(". ")}
+              </p>
             </div>
           </div>
 
@@ -437,7 +453,7 @@ const AISearchPage = ({ setCurrentView }) => {
               <span className="w-2 h-2 bg-indigo-500 rounded-full mr-2"></span>
               Available Options
             </h4>
-            
+
             <div className="grid gap-3">
               {/* Price Range Card */}
               <div className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl p-4 border border-indigo-100">
@@ -446,10 +462,13 @@ const AISearchPage = ({ setCurrentView }) => {
                     <div className="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center mr-3">
                       <span className="text-indigo-600 text-sm">💰</span>
                     </div>
-                    <span className="font-medium text-gray-700">Price Range</span>
+                    <span className="font-medium text-gray-700">
+                      Price Range
+                    </span>
                   </div>
                   <span className="font-bold text-indigo-600 text-lg">
-                    ${errorData.dataRanges.minPrice.toLocaleString()} - ${errorData.dataRanges.maxPrice.toLocaleString()}
+                    ${errorData.dataRanges.minPrice.toLocaleString()} - $
+                    {errorData.dataRanges.maxPrice.toLocaleString()}
                   </span>
                 </div>
               </div>
@@ -464,11 +483,16 @@ const AISearchPage = ({ setCurrentView }) => {
                     <span className="font-medium text-gray-700">Bedrooms</span>
                   </div>
                   <div className="flex space-x-1">
-                    {errorData.dataRanges.availableBedrooms.map((bedroom, index) => (
-                      <span key={index} className="bg-green-200 text-green-800 px-2 py-1 rounded-lg text-sm font-medium">
-                        {bedroom}
-                      </span>
-                    ))}
+                    {errorData.dataRanges.availableBedrooms.map(
+                      (bedroom, index) => (
+                        <span
+                          key={index}
+                          className="bg-green-200 text-green-800 px-2 py-1 rounded-lg text-sm font-medium"
+                        >
+                          {bedroom}
+                        </span>
+                      )
+                    )}
                   </div>
                 </div>
               </div>
@@ -483,11 +507,16 @@ const AISearchPage = ({ setCurrentView }) => {
                     <span className="font-medium text-gray-700">Locations</span>
                   </div>
                   <div className="text-right">
-                    {errorData.dataRanges.availableLocations.map((location, index) => (
-                      <div key={index} className="text-blue-600 font-medium text-sm">
-                        {location}
-                      </div>
-                    ))}
+                    {errorData.dataRanges.availableLocations.map(
+                      (location, index) => (
+                        <div
+                          key={index}
+                          className="text-blue-600 font-medium text-sm"
+                        >
+                          {location}
+                        </div>
+                      )
+                    )}
                   </div>
                 </div>
               </div>
@@ -574,11 +603,11 @@ const AISearchPage = ({ setCurrentView }) => {
       >
         <div className="p-4 border-b border-gray-200">
           <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-gradient-to-r from-pink-500 to-purple-600 rounded-lg flex items-center justify-center">
-                <Sparkles className="w-5 h-5 text-white" />
-              </div>
-              <div>
+          <div className="flex items-center space-x-3">
+            <div className="w-8 h-8 bg-gradient-to-r from-pink-500 to-purple-600 rounded-lg flex items-center justify-center">
+              <Sparkles className="w-5 h-5 text-white" />
+            </div>
+            <div>
                 <h1 className="text-xl font-semibold">{t.title}</h1>
                 <p className="text-sm text-gray-500">{t.subtitle}</p>
               </div>
@@ -690,9 +719,9 @@ const AISearchPage = ({ setCurrentView }) => {
             <div className="space-y-3 text-sm text-gray-600">
               {t.features.map((feature, index) => (
                 <div key={index} className="flex items-start space-x-2">
-                  <div className="w-1.5 h-1.5 bg-purple-500 rounded-full mt-2"></div>
+                <div className="w-1.5 h-1.5 bg-purple-500 rounded-full mt-2"></div>
                   <span>{feature}</span>
-                </div>
+              </div>
               ))}
             </div>
           </div>
