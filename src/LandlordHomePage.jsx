@@ -11,47 +11,55 @@ import {
   Home,
   User,
 } from "lucide-react";
+import { getLandlordProperties } from "./data/properties.js";
 
 const LandlordHomePage = ({ setCurrentView }) => {
   const [showApplications, setShowApplications] = useState(false);
-  
+
   // Applications data
   const applications = [
     {
       id: 1,
       applicantName: "Jessica Chen",
-      avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=50&h=50&fit=crop&crop=face",
+      avatar:
+        "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=50&h=50&fit=crop&crop=face",
       propertyTitle: "Modern Studio Apartment",
       applicationDate: "2 days ago",
-      status: "pending"
+      status: "pending",
     },
     {
       id: 2,
       applicantName: "Michael Roberts",
-      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=50&h=50&fit=crop&crop=face",
+      avatar:
+        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=50&h=50&fit=crop&crop=face",
       propertyTitle: "Bright 1-Bedroom Apartment",
       applicationDate: "3 days ago",
-      status: "pending"
+      status: "pending",
     },
     {
       id: 3,
       applicantName: "Emily Watson",
-      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=50&h=50&fit=crop&crop=face",
+      avatar:
+        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=50&h=50&fit=crop&crop=face",
       propertyTitle: "Luxury 3-Bedroom Penthouse",
       applicationDate: "5 days ago",
-      status: "pending"
+      status: "pending",
     },
     {
       id: 4,
       applicantName: "David Kim",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop&crop=face",
+      avatar:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop&crop=face",
       propertyTitle: "Modern Studio Apartment",
       applicationDate: "1 week ago",
-      status: "pending"
-    }
+      status: "pending",
+    },
   ];
 
-  const pendingApplications = applications.filter(app => app.status === "pending");
+  const pendingApplications = applications.filter(
+    (app) => app.status === "pending"
+  );
+
   // Applications List Component
   const ApplicationsList = ({ applications, onBack }) => (
     <div className="min-h-screen bg-gray-50">
@@ -61,14 +69,19 @@ const LandlordHomePage = ({ setCurrentView }) => {
           <button onClick={onBack} className="mr-3">
             <span className="text-2xl">←</span>
           </button>
-          <h1 className="text-xl font-semibold">Applications ({pendingApplications.length})</h1>
+          <h1 className="text-xl font-semibold">
+            Applications ({pendingApplications.length})
+          </h1>
         </div>
       </div>
 
       {/* Applications List */}
       <div className="p-4 space-y-3">
         {applications.map((application) => (
-          <div key={application.id} className="bg-white rounded-2xl p-4 shadow-sm">
+          <div
+            key={application.id}
+            className="bg-white rounded-2xl p-4 shadow-sm"
+          >
             <div className="flex items-center space-x-4">
               <img
                 src={application.avatar}
@@ -100,6 +113,7 @@ const LandlordHomePage = ({ setCurrentView }) => {
       </div>
     </div>
   );
+
   const LandlordBottomNav = ({ currentView, setCurrentView }) => (
     <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2">
       <div className="flex justify-around">
@@ -124,12 +138,14 @@ const LandlordHomePage = ({ setCurrentView }) => {
           <span className="text-xs">Add Property</span>
         </button>
         <button
+          onClick={() => setShowApplications(true)}
           className={`flex flex-col items-center py-2 px-4 text-gray-400`}
         >
           <MessageSquare className="w-6 h-6 mb-1" />
           <span className="text-xs">Applications</span>
         </button>
         <button
+          onClick={() => setCurrentView("filter")}
           className={`flex flex-col items-center py-2 px-4 text-gray-400`}
         >
           <Calendar className="w-6 h-6 mb-1" />
@@ -260,8 +276,9 @@ const LandlordHomePage = ({ setCurrentView }) => {
     },
   ];
 
+
   const totalRevenue = properties.reduce(
-    (sum, property) => sum + property.weeklyRevenue,
+    (sum, property) => sum + property.monthlyRevenue,
     0
   );
   const rentedProperties = properties.filter(
@@ -273,10 +290,12 @@ const LandlordHomePage = ({ setCurrentView }) => {
 
   // Show applications list if requested
   if (showApplications) {
-    return <ApplicationsList 
-      applications={pendingApplications} 
-      onBack={() => setShowApplications(false)} 
-    />;
+    return (
+      <ApplicationsList
+        applications={pendingApplications}
+        onBack={() => setShowApplications(false)}
+      />
+    );
   }
 
   return (
@@ -331,7 +350,10 @@ const LandlordHomePage = ({ setCurrentView }) => {
             </div>
           </button>
 
-          <button className="bg-white rounded-2xl p-4 shadow-sm flex items-center space-x-3 hover:shadow-md transition-shadow">
+          <button 
+            onClick={() => setShowApplications(true)}
+            className="bg-white rounded-2xl p-4 shadow-sm flex items-center space-x-3 hover:shadow-md transition-shadow"
+          >
             <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
               <MessageSquare className="w-5 h-5 text-green-600" />
             </div>
@@ -427,7 +449,7 @@ const LandlordHomePage = ({ setCurrentView }) => {
                     {property.status === "rented" && (
                       <div className="flex items-center text-xs text-green-600">
                         <DollarSign className="w-3 h-3 mr-1" />
-                        <span>{property.weeklyRevenue}/week</span>
+                        <span>${property.monthlyRevenue}/month</span>
                       </div>
                     )}
                   </div>

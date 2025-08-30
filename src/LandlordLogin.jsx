@@ -35,7 +35,10 @@ const LandlordLoginPage = ({ setCurrentView }) => {
           >
             Sign In as Landlord
           </button>
-          <button className="w-full border border-gray-300 text-gray-700 py-3 rounded-2xl font-semibold hover:bg-gray-50 transition-all">
+          <button 
+            onClick={() => setCurrentView("landlord-signup")}
+            className="w-full border border-gray-300 text-gray-700 py-3 rounded-2xl font-semibold hover:bg-gray-50 transition-all"
+          >
             Create Landlord Account
           </button>
         </div>

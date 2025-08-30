@@ -1,5 +1,6 @@
 import React from "react";
 import { Home, User, Calendar } from "lucide-react";
+import { Edit } from "lucide-react";
 
 const LandlordProfilePage = ({ setCurrentView }) => {
   // Landlord Bottom Navigation Component (inline)
@@ -56,7 +57,6 @@ const LandlordProfilePage = ({ setCurrentView }) => {
           </div>
           <div>
             <h2 className="text-xl font-semibold">Landlord Name</h2>
-            <p className="text-white/80">Property Manager</p>
           </div>
         </div>
       </div>
@@ -84,18 +84,10 @@ const LandlordProfilePage = ({ setCurrentView }) => {
           <h3 className="font-semibold mb-4">Management Tools</h3>
           <div className="space-y-3">
             <button className="w-full flex justify-between items-center p-3 hover:bg-gray-50 rounded-lg">
-              <span>Tenant Applications</span>
+              <span>Tenant Liked</span>
               <span className="bg-red-100 text-red-600 px-2 py-1 rounded-full text-xs">
                 3 new
               </span>
-            </button>
-            <button className="w-full flex justify-between items-center p-3 hover:bg-gray-50 rounded-lg">
-              <span>Maintenance Requests</span>
-              <span className="text-gray-400">→</span>
-            </button>
-            <button className="w-full flex justify-between items-center p-3 hover:bg-gray-50 rounded-lg">
-              <span>Financial Reports</span>
-              <span className="text-gray-400">→</span>
             </button>
             <button className="w-full flex justify-between items-center p-3 hover:bg-gray-50 rounded-lg">
               <span>Settings</span>
