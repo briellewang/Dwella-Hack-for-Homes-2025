@@ -15,7 +15,7 @@ import {
   getDataRanges,
   parsePriceRequirement,
   parseBedroomRequirement,
-} from "@/data/properties.js";
+} from "./data/properties.js";
 
 const AISearchPage = ({ setCurrentView }) => {
   const [inputText, setInputText] = useState("");
@@ -28,7 +28,7 @@ const AISearchPage = ({ setCurrentView }) => {
 
   // Language configurations
   const languages = {
-    en: { name: "English", flag: "🇺🇸" },
+    en: { name: "English", flag: "🇦🇺" },
     zh: { name: "中文", flag: "🇨🇳" },
     es: { name: "Español", flag: "🇪🇸" },
     fr: { name: "Français", flag: "🇫🇷" },
@@ -48,7 +48,7 @@ const AISearchPage = ({ setCurrentView }) => {
       title: "AI Property Search",
       subtitle: "Describe what you're looking for",
       placeholder:
-        "I'm looking for a 2-bedroom apartment in Brooklyn under $2000 with good public transport access, pet-friendly, and preferably with a balcony or outdoor space...",
+        "I'm looking for a 2-bedroom apartment in Crawley under $1000 with good public transport access, pet-friendly, and preferably with a balcony or outdoor space...",
       tip: "Tip: Be specific about location, budget, amenities, and lifestyle preferences",
       quickSuggestions: "Quick suggestions:",
       howItWorks: "How AI Search Works",
@@ -59,10 +59,10 @@ const AISearchPage = ({ setCurrentView }) => {
         "Learns from your swipe history",
       ],
       suggestions: [
-        "1-bedroom apartment under $3000",
-        "2-bedroom apartment in Brooklyn under $4000",
+        "1-bedroom apartment under $1000",
+        "2-bedroom apartment in Crawley under $1000",
         "Pet-friendly 1-bedroom with balcony",
-        "3-bedroom apartment in Manhattan",
+        "3-bedroom apartment in Perth",
         "Modern apartment with gym access",
         "Quiet neighborhood, close to coffee shops",
       ],
@@ -71,7 +71,7 @@ const AISearchPage = ({ setCurrentView }) => {
       title: "AI房产搜索",
       subtitle: "描述您要找的房子",
       placeholder:
-        "我在寻找布鲁克林的一个两居室公寓，价格在2000美元以下，交通便利，允许养宠物，最好有阳台或户外空间...",
+        "我在寻找克劳利的一个两居室公寓，价格在1000澳元以下，交通便利，允许养宠物，最好有阳台或户外空间...",
       tip: "提示：请具体说明位置、预算、设施和生活方式偏好",
       quickSuggestions: "快速建议：",
       howItWorks: "AI搜索工作原理",
@@ -82,10 +82,10 @@ const AISearchPage = ({ setCurrentView }) => {
         "从您的滑动历史中学习",
       ],
       suggestions: [
-        "3000美元以下的一居室公寓",
-        "布鲁克林4000美元以下的两居室公寓",
+        "1000澳元以下的一居室公寓",
+        "克劳利1000澳元以下的两居室公寓",
         "允许养宠物的一居室带阳台",
-        "曼哈顿的三居室公寓",
+        "珀斯的三居室公寓",
         "带健身房通道的现代公寓",
         "安静社区，靠近咖啡店",
       ],
@@ -105,10 +105,10 @@ const AISearchPage = ({ setCurrentView }) => {
         "Aprende de tu historial de deslizamientos",
       ],
       suggestions: [
-        "Apartamento de 1 habitación bajo $3000",
-        "Apartamento de 2 habitaciones en Brooklyn bajo $4000",
+        "Apartamento de 1 habitación bajo $1000",
+        "Apartamento de 2 habitaciones en Crawley bajo $1000",
         "1 habitación que permita mascotas con balcón",
-        "Apartamento de 3 habitaciones en Manhattan",
+        "Apartamento de 3 habitaciones en Perth",
         "Apartamento moderno con acceso a gimnasio",
         "Barrio tranquilo, cerca de cafeterías",
       ],
@@ -117,7 +117,7 @@ const AISearchPage = ({ setCurrentView }) => {
       title: "Recherche de Propriétés IA",
       subtitle: "Décrivez ce que vous cherchez",
       placeholder:
-        "Je cherche un appartement de 2 chambres à Brooklyn sous 2000$ avec un bon accès aux transports en commun, acceptant les animaux, et de préférence avec un balcon ou un espace extérieur...",
+        "Je cherche un appartement de 2 chambres à Crawley sous 1000$ avec un bon accès aux transports en commun, acceptant les animaux, et de préférence avec un balcon ou un espace extérieur...",
       tip: "Conseil: Soyez spécifique sur l'emplacement, le budget, les équipements et les préférences de style de vie",
       quickSuggestions: "Suggestions rapides:",
       howItWorks: "Comment Fonctionne la Recherche IA",
@@ -128,10 +128,10 @@ const AISearchPage = ({ setCurrentView }) => {
         "Apprend de votre historique de glissements",
       ],
       suggestions: [
-        "Appartement 1 chambre sous 3000$",
-        "Appartement 2 chambres à Brooklyn sous 4000$",
+        "Appartement 1 chambre sous 1000$",
+        "Appartement 2 chambres à Crawley sous 1000$",
         "1 chambre acceptant les animaux avec balcon",
-        "Appartement 3 chambres à Manhattan",
+        "Appartement 3 chambres à Perth",
         "Appartement moderne avec accès au gym",
         "Quartier calme, près des cafés",
       ],
@@ -140,7 +140,7 @@ const AISearchPage = ({ setCurrentView }) => {
       title: "KI-Immobiliensuche",
       subtitle: "Beschreiben Sie, wonach Sie suchen",
       placeholder:
-        "Ich suche eine 2-Zimmer-Wohnung in Brooklyn unter 2000$ mit guter Anbindung an öffentliche Verkehrsmittel, haustierfreundlich und vorzugsweise mit Balkon oder Außenbereich...",
+        "Ich suche eine 2-Zimmer-Wohnung in Crawley unter 1000$ mit guter Anbindung an öffentliche Verkehrsmittel, haustierfreundlich und vorzugsweise mit Balkon oder Außenbereich...",
       tip: "Tipp: Seien Sie spezifisch bezüglich Standort, Budget, Ausstattung und Lebensstil-Präferenzen",
       quickSuggestions: "Schnelle Vorschläge:",
       howItWorks: "Wie die KI-Suche funktioniert",
@@ -151,10 +151,10 @@ const AISearchPage = ({ setCurrentView }) => {
         "Lernt aus Ihrer Wisch-Historie",
       ],
       suggestions: [
-        "1-Zimmer-Wohnung unter 3000$",
+        "1-Zimmer-Wohnung unter 1000$",
         "Haustierfreundliche 1-Zimmer-Wohnung mit Balkon",
-        "2-Zimmer-Wohnung in Brooklyn unter 4000$",
-        "3-Zimmer-Wohnung in Manhattan",
+        "2-Zimmer-Wohnung in Crawley unter 1000$",
+        "3-Zimmer-Wohnung in Perth",
         "Moderne Wohnung mit Fitnessstudio-Zugang",
         "Ruhige Nachbarschaft, in der Nähe von Cafés",
       ],
@@ -174,9 +174,9 @@ const AISearchPage = ({ setCurrentView }) => {
         "スワイプ履歴から学習します",
       ],
       suggestions: [
-        "3000ドル以下の1ベッドルームアパート",
+        "1000ドル以下の1ベッドルームアパート",
         "ペット可の1ベッドルーム、バルコニー付き",
-        "ブルックリンの4000ドル以下の2ベッドルームアパート",
+        "ブルックリンの1000ドル以下の2ベッドルームアパート",
         "マンハッタンの3ベッドルームアパート",
         "ジムアクセス付きのモダンアパート",
         "静かな近隣、カフェに近い",
@@ -186,7 +186,7 @@ const AISearchPage = ({ setCurrentView }) => {
       title: "AI 부동산 검색",
       subtitle: "찾고 계신 것을 설명해주세요",
       placeholder:
-        "브루클린의 2베드룸 아파트를 찾고 있습니다. 2000달러 이하로, 대중교통 접근성이 좋고, 애완동물 허용이며, 바람직하게는 발코니나 야외 공간이 있는 곳...",
+        "브루클린의 2베드룸 아파트를 찾고 있습니다. 1000달러 이하로, 대중교통 접근성이 좋고, 애완동물 허용이며, 바람직하게는 발코니나 야외 공간이 있는 곳...",
       tip: "팁: 위치, 예산, 편의시설, 라이프스타일 선호도를 구체적으로 설명해주세요",
       quickSuggestions: "빠른 제안:",
       howItWorks: "AI 검색 작동 방식",
@@ -197,9 +197,9 @@ const AISearchPage = ({ setCurrentView }) => {
         "스와이프 기록에서 학습합니다",
       ],
       suggestions: [
-        "3000달러 이하 1베드룸 아파트",
+        "1000달러 이하 1베드룸 아파트",
         "애완동물 허용 1베드룸, 발코니 포함",
-        "브루클린 4000달러 이하 2베드룸 아파트",
+        "브루클린 1000달러 이하 2베드룸 아파트",
         "맨하튼 3베드룸 아파트",
         "헬스장 접근이 가능한 모던 아파트",
         "조용한 동네, 카페 근처",
@@ -266,9 +266,9 @@ const AISearchPage = ({ setCurrentView }) => {
         "Учится из вашей истории свайпов",
       ],
       suggestions: [
-        "1-комнатная квартира под $3000",
+        "1-комнатная квартира под $1000",
         "1-комнатная с животными с балконом",
-        "2-комнатная квартира в Бруклине под $4000",
+        "2-комнатная квартира в Бруклине под $1000",
         "3-комнатная квартира в Манхэттене",
         "Современная квартира с доступом к тренажерному залу",
         "Тихий район, рядом с кафе",
@@ -289,9 +289,9 @@ const AISearchPage = ({ setCurrentView }) => {
         "يتعلم من تاريخ التمرير الخاص بك",
       ],
       suggestions: [
-        "شقة من غرفة واحدة تحت 3000 دولار",
+        "شقة من غرفة واحدة تحت 1000 دولار",
         "غرفة واحدة تسمح بالحيوانات الأليفة مع شرفة",
-        "شقة من غرفتين في بروكلين تحت 4000 دولار",
+        "شقة من غرفتين في بروكلين تحت 1000 دولار",
         "شقة من ثلاث غرف في مانهاتن",
         "شقة حديثة مع وصول إلى الصالة الرياضية",
         "حي هادئ، قريب من المقاهي",
@@ -406,49 +406,130 @@ const AISearchPage = ({ setCurrentView }) => {
     if (!isOpen || !errorData) return null;
 
     return (
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-        <div className="bg-white rounded-2xl p-6 max-w-md w-full mx-4 shadow-2xl">
-          <div className="flex items-center mb-4">
-            <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center mr-3">
-              <span className="text-red-600 text-xl">⚠️</span>
+      <div className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fadeIn">
+        <div className="bg-white rounded-3xl p-8 max-w-lg w-full mx-4 shadow-2xl border border-gray-100 animate-slideUp transform">
+          {/* Header with gradient background */}
+          <div className="relative mb-6">
+            <div className="absolute inset-0 bg-gradient-to-r from-red-500 to-orange-500 rounded-2xl opacity-10"></div>
+            <div className="relative flex items-center">
+              <div className="w-14 h-14 bg-gradient-to-r from-red-500 to-orange-500 rounded-2xl flex items-center justify-center mr-4 shadow-lg">
+                <svg
+                  className="w-7 h-7 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"
+                  />
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-gray-800">
+                  Search Criteria Issue
+                </h3>
+                <p className="text-sm text-gray-500">
+                  Let's find something that works for you
+                </p>
+              </div>
             </div>
-            <h3 className="text-lg font-semibold text-gray-800">Search Error</h3>
           </div>
-          
-          <div className="mb-4">
-            <p className="text-gray-600 mb-3">{errorData.errors.join(". ")}</p>
-            
-            <div className="bg-gray-50 rounded-lg p-4">
-              <h4 className="font-semibold text-gray-800 mb-2">Available Options:</h4>
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Price Range:</span>
-                  <span className="font-medium text-indigo-600">
-                    ${errorData.dataRanges.minPrice.toLocaleString()} - ${errorData.dataRanges.maxPrice.toLocaleString()}
+
+          {/* Error message */}
+          <div className="mb-6">
+            <div className="bg-red-50 border-l-4 border-red-400 p-4 rounded-r-lg">
+              <p className="text-red-800 font-medium">
+                {errorData.errors.join(". ")}
+              </p>
+            </div>
+          </div>
+
+          {/* Available options with beautiful cards */}
+          <div className="mb-6">
+            <h4 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+              <span className="w-2 h-2 bg-indigo-500 rounded-full mr-2"></span>
+              Available Options
+            </h4>
+
+            <div className="grid gap-3">
+              {/* Price Range Card */}
+              <div className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl p-4 border border-indigo-100">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <div className="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center mr-3">
+                      <span className="text-indigo-600 text-sm">💰</span>
+                    </div>
+                    <span className="font-medium text-gray-700">
+                      Price Range
+                    </span>
+                  </div>
+                  <span className="font-bold text-indigo-600 text-lg">
+                    ${errorData.dataRanges.minPrice.toLocaleString()} - $
+                    {errorData.dataRanges.maxPrice.toLocaleString()}
                   </span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Bedrooms:</span>
-                  <span className="font-medium text-indigo-600">
-                    {errorData.dataRanges.availableBedrooms.join(", ")}
-                  </span>
+              </div>
+
+              {/* Bedrooms Card */}
+              <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-4 border border-green-100">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center mr-3">
+                      <span className="text-green-600 text-sm">🏠</span>
+                    </div>
+                    <span className="font-medium text-gray-700">Bedrooms</span>
+                  </div>
+                  <div className="flex space-x-1">
+                    {errorData.dataRanges.availableBedrooms.map(
+                      (bedroom, index) => (
+                        <span
+                          key={index}
+                          className="bg-green-200 text-green-800 px-2 py-1 rounded-lg text-sm font-medium"
+                        >
+                          {bedroom}
+                        </span>
+                      )
+                    )}
+                  </div>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Locations:</span>
-                  <span className="font-medium text-indigo-600">
-                    {errorData.dataRanges.availableLocations.join(", ")}
-                  </span>
+              </div>
+
+              {/* Locations Card */}
+              <div className="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl p-4 border border-blue-100">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                      <span className="text-blue-600 text-sm">📍</span>
+                    </div>
+                    <span className="font-medium text-gray-700">Locations</span>
+                  </div>
+                  <div className="text-right">
+                    {errorData.dataRanges.availableLocations.map(
+                      (location, index) => (
+                        <div
+                          key={index}
+                          className="text-blue-600 font-medium text-sm"
+                        >
+                          {location}
+                        </div>
+                      )
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          
+
+          {/* Action buttons */}
           <div className="flex space-x-3">
             <button
               onClick={onClose}
-              className="flex-1 bg-indigo-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-indigo-700 transition-colors"
+              className="flex-1 bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-3 px-6 rounded-xl font-semibold hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
             >
-              Got it
+              Got it, thanks!
             </button>
           </div>
         </div>
@@ -648,12 +729,12 @@ const AISearchPage = ({ setCurrentView }) => {
 
         <BottomNav currentView="llm-input" setCurrentView={setCurrentView} />
       </div>
-      
+
       {/* Error Modal */}
-      <ErrorModal 
-        isOpen={showErrorModal} 
-        onClose={() => setShowErrorModal(false)} 
-        errorData={errorData} 
+      <ErrorModal
+        isOpen={showErrorModal}
+        onClose={() => setShowErrorModal(false)}
+        errorData={errorData}
       />
     </div>
   );
