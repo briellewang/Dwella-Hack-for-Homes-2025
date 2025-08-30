@@ -11,6 +11,8 @@ import ForumPage from "./ForumPage";
 import AISearchPage from "./AISearchPage";
 import FilterPage from "./FilterPage";
 import SwipeRight from "./SwipeRight";
+import UserSignupPage from "./UserSignupPage";
+import LandlordSignupPage from "./LandlordSignupPage";
 
 function App() {
   const [currentView, setCurrentView] = useState("login");
@@ -20,8 +22,12 @@ function App() {
     switch (currentView) {
       case "login":
         return <Login setCurrentView={setCurrentView} />;
+      case "user-signup":
+        return <UserSignupPage setCurrentView={setCurrentView} />;
       case "landlord-login":
         return <LandlordLogin setCurrentView={setCurrentView} />;
+      case "landlord-signup":
+        return <LandlordSignupPage setCurrentView={setCurrentView} />;
       case "landlord-home":
         return <LandlordHomePage setCurrentView={setCurrentView} />;
       case "landlord-profile":
