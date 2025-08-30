@@ -10,7 +10,7 @@ const LandlordLoginPage = ({ setCurrentView }) => {
             <Users className="w-10 h-10 text-white" />
           </div>
           <h1 className="text-3xl font-bold text-gray-800 mb-2">
-            Landlord Portal
+            Dwella Landlord
           </h1>
           <p className="text-gray-600">Manage your properties</p>
         </div>

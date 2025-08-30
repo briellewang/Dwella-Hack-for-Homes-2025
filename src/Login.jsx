@@ -9,8 +9,8 @@ const LoginPage = ({ setCurrentView }) => {
           <div className="w-20 h-20 bg-gradient-to-r from-pink-500 to-purple-600 rounded-2xl mx-auto mb-4 flex items-center justify-center">
             <Home className="w-10 h-10 text-white" />
           </div>
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">RentSwipe</h1>
-          <p className="text-gray-600">Swipe to find your perfect home</p>
+          <h1 className="text-3xl font-bold text-gray-800 mb-2">Dwella</h1>
+          <p className="text-gray-600">Find Your Place Faster</p>
         </div>
         
         <div className="space-y-4 mb-6">
