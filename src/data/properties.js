@@ -17,6 +17,10 @@ export const properties = [
     description:
       "Beautiful modern studio with great city views and excellent transportation links.",
     features: ["5 min to subway", "24/7 security", "Free WiFi", "Gym access"],
+    tags: ["Near Subway", "24/7 Security", "Gym", "WiFi"],
+    amenities: "AC, Washing Machine, Refrigerator, Microwave",
+    surroundings: "Near subway station, shopping center, restaurants",
+    terms: "2 months deposit, minimum 6 months lease",
     rating: 4.8,
     isLiked: true,
     // Landlord specific data
@@ -48,6 +52,10 @@ export const properties = [
       "Parking space",
       "Pet friendly",
     ],
+    tags: ["Pet Friendly", "Parking", "High Ceilings", "Industrial Style"],
+    amenities: "AC, Washing Machine, Dryer, Dishwasher",
+    surroundings: "Near parks, cafes, art district",
+    terms: "1.5 months deposit, minimum 12 months lease",
     rating: 4.6,
     isLiked: true,
     // Landlord specific data
@@ -74,6 +82,10 @@ export const properties = [
     description:
       "Stunning penthouse with panoramic city views and premium amenities.",
     features: ["City views", "Doorman", "Gym", "Pool", "Rooftop access"],
+    tags: ["City View", "Doorman", "Pool", "Rooftop Garden", "Luxury"],
+    amenities: "AC, Washing Machine, Dryer, Dishwasher, Oven, Microwave",
+    surroundings: "Near luxury shops, fine dining, Central Park",
+    terms: "3 months deposit, minimum 24 months lease",
     rating: 4.9,
     isLiked: true,
     // Landlord specific data
@@ -105,6 +117,10 @@ export const properties = [
       "Smart locks",
       "Laundry in unit",
     ],
+    tags: ["Large Windows", "Private Balcony", "Smart Lock", "In-Unit Laundry"],
+    amenities: "AC, Washing Machine, Dryer, Dishwasher, Microwave",
+    surroundings: "Near schools, supermarkets, bus stops",
+    terms: "2 months deposit, minimum 6 months lease",
     rating: 4.5,
     isLiked: true,
     // Landlord specific data
@@ -131,6 +147,10 @@ export const properties = [
     description:
       "Perfect family home with backyard, garage, and quiet neighborhood.",
     features: ["Backyard", "Garage", "Quiet street", "Good schools nearby"],
+    tags: ["Backyard", "Garage", "Quiet Street", "Good Schools"],
+    amenities: "AC, Washing Machine, Dryer, Dishwasher, Oven, Microwave",
+    surroundings: "Near schools, parks, shopping centers",
+    terms: "2 months deposit, minimum 12 months lease",
     rating: 4.7,
     isLiked: true,
     // Landlord specific data
