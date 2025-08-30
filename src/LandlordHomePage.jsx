@@ -218,7 +218,7 @@ const LandlordHomePage = ({ setCurrentView }) => {
         "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400&h=300&fit=crop",
         "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&h=300&fit=crop",
       ],
-      status: "available", 
+      status: "available",
       tenant: null,
       views: 892,
       inquiries: 45,
@@ -267,7 +267,6 @@ const LandlordHomePage = ({ setCurrentView }) => {
       weeklyRevenue: 1375,
     },
   ];
-
 
   const totalRevenue = properties.reduce(
     (sum, property) => sum + property.monthlyRevenue,
@@ -342,7 +341,7 @@ const LandlordHomePage = ({ setCurrentView }) => {
             </div>
           </button>
 
-          <button 
+          <button
             onClick={() => setShowApplications(true)}
             className="bg-white rounded-2xl p-4 shadow-sm flex items-center space-x-3 hover:shadow-md transition-shadow"
           >
