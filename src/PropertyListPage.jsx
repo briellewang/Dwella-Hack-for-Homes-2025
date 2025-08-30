@@ -415,11 +415,12 @@ const PropertyChatPage = ({ setCurrentView }) => {
             currentView === "home" ? "text-purple-600" : "text-gray-400"
           }`}
         >
-          <Home className="w-6 h-6 mb-1" />
+          <Home className="w-5 h-5 mb-1" />
           <span className="text-xs">Discover</span>
         </button>
         <button
           onClick={() => setCurrentView("property-list")}
+
           className={`flex flex-col items-center justify-center py-2 px-4 transition-colors ${
             currentView === "property-list" ? "text-purple-600" : "text-gray-400"
           }`}
@@ -434,24 +435,29 @@ const PropertyChatPage = ({ setCurrentView }) => {
           }`}
         >
           <Search className="w-6 h-6 mb-1" />
+
           <span className="text-xs">AI Search</span>
         </button>
         <button
           onClick={() => setCurrentView("forum")}
+
           className={`flex flex-col items-center justify-center py-2 px-4 transition-colors ${
             currentView === "forum" ? "text-purple-600" : "text-gray-400"
           }`}
         >
           <MessageCircle className="w-6 h-6 mb-1" />
+
           <span className="text-xs">Forum</span>
         </button>
         <button
           onClick={() => setCurrentView("profile")}
+
           className={`flex flex-col items-center justify-center py-2 px-4 transition-colors ${
+
             currentView === "profile" ? "text-purple-600" : "text-gray-400"
           }`}
         >
-          <User className="w-6 h-6 mb-1" />
+          <User className="w-5 h-5 mb-1" />
           <span className="text-xs">Profile</span>
         </button>
       </div>
@@ -488,20 +494,29 @@ const PropertyChatPage = ({ setCurrentView }) => {
             { key: "rating", label: "Bedrooms" },
             { key: "area", label: "Size" },
           ].map((option) => (
+
             <button
-              key={option.key}
-              onClick={() => setSortBy(option.key)}
-              className={`px-3 py-1 rounded-full text-sm ${
-                sortBy === option.key
+              onClick={() => setSortBy("rating")}
+              className={`px-3 py-1 rounded-full text-sm font-medium ${
+                sortBy === "rating"
                   ? "bg-purple-100 text-purple-600"
                   : "bg-gray-100 text-gray-600"
               }`}
             >
-              {option.label}
+              Rating
             </button>
-          ))}
+            <button
+              onClick={() => setSortBy("area")}
+              className={`px-3 py-1 rounded-full text-sm font-medium ${
+                sortBy === "area"
+                  ? "bg-purple-100 text-purple-600"
+                  : "bg-gray-100 text-gray-600"
+              }`}
+            >
+              Area
+            </button>
+          </div>
         </div>
-      </div>
 
       {/* Property Chat List */}
       <div className="flex-1 overflow-y-auto pb-24">
@@ -618,6 +633,7 @@ const PropertyChatPage = ({ setCurrentView }) => {
                   }`}>
                     {property.lastMessage}
                   </p>
+
                 </div>
 
                 <ChevronRight className="w-5 h-5 text-gray-400 flex-shrink-0" />
@@ -644,11 +660,13 @@ const PropertyChatPage = ({ setCurrentView }) => {
             >
               Start Browsing
             </button>
+
           </div>
         </div>
-      )}
 
-      <BottomNav currentView="property-list" setCurrentView={setCurrentView} />
+        {/* Bottom Navigation */}
+        <BottomNav currentView="property-list" setCurrentView={setCurrentView} />
+      </div>
     </div>
   );
 };
