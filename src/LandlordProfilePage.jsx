@@ -3,6 +3,8 @@ import { Home, User, Calendar } from "lucide-react";
 import { Edit } from "lucide-react";
 
 const LandlordProfilePage = ({ setCurrentView }) => {
+  
+
   // Landlord Bottom Navigation Component (inline)
   const LandlordBottomNav = ({ currentView, setCurrentView }) => (
     <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2">
@@ -26,12 +28,6 @@ const LandlordProfilePage = ({ setCurrentView }) => {
         >
           <Edit className="w-6 h-6 mb-1" />
           <span className="text-xs">Add Property</span>
-        </button>
-        <button
-          className={`flex flex-col items-center py-2 px-4 text-gray-400`}
-        >
-          <Calendar className="w-6 h-6 mb-1" />
-          <span className="text-xs">Schedule</span>
         </button>
         <button
           onClick={() => setCurrentView("landlord-profile")}

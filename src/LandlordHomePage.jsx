@@ -136,6 +136,7 @@ const LandlordHomePage = ({ setCurrentView }) => {
           <Edit className="w-6 h-6 mb-1" />
           <span className="text-xs">Add Property</span>
         </button>
+        {/*
         <button
           onClick={() => setShowApplications(true)}
           className={`flex flex-col items-center py-2 px-4 text-gray-400`}
@@ -143,6 +144,7 @@ const LandlordHomePage = ({ setCurrentView }) => {
           <MessageSquare className="w-6 h-6 mb-1" />
           <span className="text-xs">Applications</span>
         </button>
+        */}
         <button
           onClick={() => setCurrentView("landlord-profile")}
           className={`flex flex-col items-center py-2 px-4 ${
@@ -300,14 +302,16 @@ const LandlordHomePage = ({ setCurrentView }) => {
               {properties.length} properties • {rentedProperties} rented
             </p>
           </div>
+          {/* Quick Actions 
           <button
             onClick={() => setCurrentView("add-property")}
             className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-colors"
           >
             <Edit className="w-6 h-6" />
           </button>
+          */}
         </div>
-
+          
         {/* Quick Stats */}
         <div className="grid grid-cols-3 gap-4 mt-6">
           <div className="text-center">

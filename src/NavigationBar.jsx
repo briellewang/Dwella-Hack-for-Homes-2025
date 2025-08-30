@@ -75,22 +75,9 @@ export const LandlordBottomNav = ({ currentView, setCurrentView }) => (
         <Home className="w-6 h-6 mb-1" />
         <span className="text-xs">Properties</span>
       </button>
-      <button
-        onClick={() => setCurrentView("add-property")}
-        className={`flex flex-col items-center py-2 px-4 ${
-          currentView === "add-property" ? "text-indigo-600" : "text-gray-400"
-        }`}
-      >
-        <Edit className="w-6 h-6 mb-1" />
-        <span className="text-xs">Add Property</span>
-      </button>
       <button className={`flex flex-col items-center py-2 px-4 text-gray-400`}>
         <MessageCircle className="w-6 h-6 mb-1" />
         <span className="text-xs">Applications</span>
-      </button>
-      <button className={`flex flex-col items-center py-2 px-4 text-gray-400`}>
-        <Calendar className="w-6 h-6 mb-1" />
-        <span className="text-xs">Schedule</span>
       </button>
       <button
         onClick={() => setCurrentView("landlord-profile")}
