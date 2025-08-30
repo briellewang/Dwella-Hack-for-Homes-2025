@@ -1,7 +1,10 @@
 import React from "react";
 import { Home, User, Calendar } from "lucide-react";
+import { Edit } from "lucide-react";
 
 const LandlordProfilePage = ({ setCurrentView }) => {
+  
+
   // Landlord Bottom Navigation Component (inline)
   const LandlordBottomNav = ({ currentView, setCurrentView }) => (
     <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2">
@@ -27,12 +30,6 @@ const LandlordProfilePage = ({ setCurrentView }) => {
           <span className="text-xs">Add Property</span>
         </button>
         <button
-          className={`flex flex-col items-center py-2 px-4 text-gray-400`}
-        >
-          <Calendar className="w-6 h-6 mb-1" />
-          <span className="text-xs">Schedule</span>
-        </button>
-        <button
           onClick={() => setCurrentView("landlord-profile")}
           className={`flex flex-col items-center py-2 px-4 ${
             currentView === "landlord-profile"
@@ -56,7 +53,6 @@ const LandlordProfilePage = ({ setCurrentView }) => {
           </div>
           <div>
             <h2 className="text-xl font-semibold">Landlord Name</h2>
-            <p className="text-white/80">Property Manager</p>
           </div>
         </div>
       </div>
@@ -84,18 +80,10 @@ const LandlordProfilePage = ({ setCurrentView }) => {
           <h3 className="font-semibold mb-4">Management Tools</h3>
           <div className="space-y-3">
             <button className="w-full flex justify-between items-center p-3 hover:bg-gray-50 rounded-lg">
-              <span>Tenant Applications</span>
+              <span>Tenant Liked</span>
               <span className="bg-red-100 text-red-600 px-2 py-1 rounded-full text-xs">
                 3 new
               </span>
-            </button>
-            <button className="w-full flex justify-between items-center p-3 hover:bg-gray-50 rounded-lg">
-              <span>Maintenance Requests</span>
-              <span className="text-gray-400">→</span>
-            </button>
-            <button className="w-full flex justify-between items-center p-3 hover:bg-gray-50 rounded-lg">
-              <span>Financial Reports</span>
-              <span className="text-gray-400">→</span>
             </button>
             <button className="w-full flex justify-between items-center p-3 hover:bg-gray-50 rounded-lg">
               <span>Settings</span>

@@ -1,5 +1,7 @@
+
 import React, { useState, useRef } from "react";
 import { BottomNav } from "./NavigationBar";
+
 import {
   Heart,
   X,
@@ -13,14 +15,192 @@ import {
   Square,
   User,
   Users,
+  Sparkles,
+  ChevronLeft,
+  ChevronRight,
+  Star,
+  Info,
+  SkipForward,
+  ZoomIn,
+  ZoomOut,
+  Wifi,
+  Car,
+  Dog,
+  Building,
+  TreePine,
+  Shield,
 } from "lucide-react";
+import {
+  properties,
+  filterProperties,
+  getDataRanges,
+} from "./data/properties.js";
 
 const SwipeHomePage = ({ setCurrentView }) => {
   const [currentCard, setCurrentCard] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [filteredProperties, setFilteredProperties] = useState([]);
+  const [isFiltered, setIsFiltered] = useState(false);
+  const [searchCriteria, setSearchCriteria] = useState(null);
+  const [swipeDirection, setSwipeDirection] = useState(null);
+  const [isAnimating, setIsAnimating] = useState(false);
+  
+  // New state for enhanced features
+  const [isImageZoomed, setIsImageZoomed] = useState(false);
+  const [showMoreInfo, setShowMoreInfo] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isLongPressing, setIsLongPressing] = useState(false);
+  const [favorites, setFavorites] = useState([]);
+  const [showTutorial, setShowTutorial] = useState(true);
+  const [longPressTimer, setLongPressTimer] = useState(null);
+  
   const cardRef = useRef(null);
+  const longPressRef = useRef(null);
+
+  // Check for AI search criteria on component mount
+  useEffect(() => {
+    const criteria = localStorage.getItem("aiSearchCriteria");
+    const error = localStorage.getItem("aiSearchError");
+    const savedFavorites = localStorage.getItem("favorites");
+    const tutorialShown = localStorage.getItem("tutorialShown");
+
+    if (savedFavorites) {
+      setFavorites(JSON.parse(savedFavorites));
+    }
+    
+    if (tutorialShown) {
+      setShowTutorial(false);
+    }
+
+    if (error) {
+      // If there's an error, show it and don't filter
+      const errorData = JSON.parse(error);
+      alert(
+        `Search Error: ${
+          errorData.message
+        }\n\nAvailable options:\n- Price range: $${errorData.availableRanges.minPrice.toLocaleString()} - $${errorData.availableRanges.maxPrice.toLocaleString()}\n- Bedrooms: ${errorData.availableRanges.availableBedrooms.join(
+          ", "
+        )}\n- Locations: ${errorData.availableRanges.availableLocations.join(
+          ", "
+        )}`
+      );
+      localStorage.removeItem("aiSearchError");
+      return;
+    }
+
+    if (criteria) {
+      const parsedCriteria = JSON.parse(criteria);
+      setSearchCriteria(parsedCriteria);
+      setIsFiltered(true);
+      // Filter properties based on AI search criteria
+      filterPropertiesBasedOnCriteria(parsedCriteria);
+      // Clear the criteria after use
+      localStorage.removeItem("aiSearchCriteria");
+    }
+  }, []);
+
+  // Save favorites to localStorage
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }, [favorites]);
+
+  // Filter properties based on AI search criteria
+  const filterPropertiesBasedOnCriteria = (criteria) => {
+    const result = filterProperties(criteria);
+
+    // If there are unmet requirements or no matching properties, show error
+    if (result.unmetRequirements.length > 0 || result.filtered.length === 0) {
+      const errorMessage =
+        result.unmetRequirements.length > 0
+          ? result.unmetRequirements.join(". ")
+          : "No properties match your criteria. Try adjusting your requirements.";
+
+      // Store error message and don't set filtered properties
+      localStorage.setItem(
+        "aiSearchError",
+        JSON.stringify({
+          message: errorMessage,
+          criteria: criteria.query,
+          availableRanges: result.dataRanges,
+        })
+      );
+      setFilteredProperties([]);
+      setIsFiltered(false);
+      return;
+    }
+
+    setFilteredProperties(result.filtered);
+  };
+
+  // Enhanced haptic feedback function
+  const triggerHapticFeedback = (intensity = 50) => {
+    if (navigator.vibrate) {
+      navigator.vibrate(intensity);
+    }
+  };
+
+  // Convert monthly rent to weekly rent
+  const convertToWeeklyRent = (monthlyPrice) => {
+    const price = monthlyPrice.replace(/[$,]/g, '');
+    const monthlyAmount = parseInt(price);
+    const weeklyAmount = Math.round(monthlyAmount / 4.33); // 52 weeks / 12 months
+    return `$${weeklyAmount.toLocaleString()}/week`;
+  };
+
+  // Get icon for tag
+  const getTagIcon = (tag) => {
+    const iconMap = {
+      'Near Subway': MapPin,
+      '24/7 Security': Shield,
+      'Gym': Building,
+      'WiFi': Wifi,
+      'Pet Friendly': Dog,
+      'Parking': Car,
+      'High Ceilings': Building,
+      'Industrial Style': Building,
+      'City View': Building,
+      'Doorman': Shield,
+      'Pool': Building,
+      'Rooftop Garden': TreePine,
+      'Luxury': Star,
+      'Large Windows': Building,
+      'Private Balcony': Building,
+      'Smart Lock': Shield,
+      'In-Unit Laundry': Building,
+      'Backyard': TreePine,
+      'Garage': Car,
+      'Quiet Street': MapPin,
+      'Good Schools': Building,
+    };
+    return iconMap[tag] || Building;
+  };
+
+  // Double tap to zoom image
+  const handleDoubleTap = () => {
+    setIsImageZoomed(!isImageZoomed);
+    triggerHapticFeedback(30);
+  };
+
+  // Long press to favorite
+  const handleLongPressStart = () => {
+    const timer = setTimeout(() => {
+      setIsLongPressing(true);
+      triggerHapticFeedback(100);
+      
+      const currentProperties = getCurrentProperties();
+      const currentProperty = currentProperties[currentCard];
+      
+      if (!favorites.includes(currentProperty.id)) {
+        setFavorites([...favorites, currentProperty.id]);
+      }
+      
+      setTimeout(() => setIsLongPressing(false), 1000);
+    }, 500);
+    
+    setLongPressTimer(timer);
+  };
 
   // Sample property data with multiple images
   const properties = [
@@ -111,30 +291,65 @@ const SwipeHomePage = ({ setCurrentView }) => {
     },
   ];
 
+
   // Touch/Mouse event handlers for swiping
   const handleStart = (e) => {
+    if (isAnimating) return;
     setIsDragging(true);
+    setSwipeDirection(null);
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
     const clientY = e.touches ? e.touches[0].clientY : e.clientY;
     setDragStart({ x: clientX, y: clientY });
+    
+    // Start long press timer
+    handleLongPressStart();
   };
 
   const handleMove = (e) => {
-    if (!isDragging) return;
+    if (!isDragging || isAnimating) return;
     e.preventDefault();
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
     const clientY = e.touches ? e.touches[0].clientY : e.clientY;
     const deltaX = clientX - dragStart.x;
     const deltaY = clientY - dragStart.y;
     setDragOffset({ x: deltaX, y: deltaY });
+    
+    // Cancel long press if moved too much
+    if (Math.abs(deltaX) > 10 || Math.abs(deltaY) > 10) {
+      handleLongPressEnd();
+    }
+    
+    // Set swipe direction for visual feedback
+    if (Math.abs(deltaX) > 20) {
+      setSwipeDirection(deltaX > 0 ? 'right' : 'left');
+    }
+    
+    // Handle vertical swipes
+    if (Math.abs(deltaY) > 50) {
+      if (deltaY > 0) {
+        // Swiped down - skip to next
+        if (Math.abs(deltaY) > 100) {
+          handleSkip();
+        }
+      } else {
+        // Swiped up - show more info
+        if (Math.abs(deltaY) > 100) {
+          setShowMoreInfo(true);
+        }
+      }
+    }
   };
 
   const handleEnd = () => {
-    if (!isDragging) return;
+    if (!isDragging || isAnimating) return;
     setIsDragging(false);
+    handleLongPressEnd();
 
-    const threshold = 100;
+    const threshold = 120; // Increased threshold for better UX
     if (Math.abs(dragOffset.x) > threshold) {
+      setIsAnimating(true);
+      triggerHapticFeedback(50);
+      
       if (dragOffset.x > 0) {
         // Swiped right - Like
         handleLike();
@@ -142,20 +357,31 @@ const SwipeHomePage = ({ setCurrentView }) => {
         // Swiped left - Dislike
         handleDislike();
       }
+      
+      // Reset animation state after animation completes
+      setTimeout(() => {
+        setIsAnimating(false);
+        setSwipeDirection(null);
+      }, 300);
     }
 
     setDragOffset({ x: 0, y: 0 });
+    setShowMoreInfo(false);
   };
 
   const handleLike = () => {
-    if (currentCard < properties.length - 1) {
+    const currentProperties = isFiltered ? filteredProperties : properties;
+    if (currentCard < currentProperties.length - 1) {
       setCurrentCard(currentCard + 1);
+      setCurrentImageIndex(0);
     }
   };
 
   const handleDislike = () => {
-    if (currentCard < properties.length - 1) {
+    const currentProperties = isFiltered ? filteredProperties : properties;
+    if (currentCard < currentProperties.length - 1) {
       setCurrentCard(currentCard + 1);
+      setCurrentImageIndex(0);
     }
   };
 
@@ -250,7 +476,9 @@ const SwipeHomePage = ({ setCurrentView }) => {
                       <MapPin className="w-4 h-4 mr-1" />
                       <span>{properties[currentCard].location}</span>
                     </div>
+
                   </div>
+                  <span>Long press to favorite</span>
                 </div>
 
                 <div className="p-6 h-1/3 flex flex-col justify-between">
@@ -340,11 +568,12 @@ const SwipeHomePage = ({ setCurrentView }) => {
           >
             <Heart className="w-8 h-8 text-pink-500" />
           </button>
+
         </div>
-      )}
 
       {/* Fixed Bottom Navigation */}
       <BottomNav currentView="home" setCurrentView={setCurrentView} />
+
     </div>
   );
 };

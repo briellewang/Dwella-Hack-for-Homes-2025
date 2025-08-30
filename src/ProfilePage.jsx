@@ -21,18 +21,15 @@ import {
 
 const ProfilePage = ({ setCurrentView }) => {
 
-
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Profile Header */}
       <div className="bg-gradient-to-r from-pink-500 to-purple-600 text-white p-6">
         <div className="flex items-center space-x-4">
-          <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center text-2xl font-bold">
-            A
-          </div>
+          <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center text-2xl font-bold">J</div>
           <div className="flex-1">
-            <h2 className="text-xl font-semibold">Alex Johnson</h2>
-            <p className="text-white/80">Member since March 2024</p>
+            <h2 className="text-xl font-semibold">Josh Findhouse</h2>
+            <p className="text-white/80">Membesr since March 2024</p>
             <div className="flex items-center mt-1">
               <div className="flex items-center mr-3">
                 <Star className="w-4 h-4 text-yellow-300 fill-yellow-300 mr-1" />
@@ -51,7 +48,7 @@ const ProfilePage = ({ setCurrentView }) => {
         {/* Quick Stats */}
         <div className="bg-white rounded-2xl p-4">
           <h3 className="font-semibold mb-4">Activity Summary</h3>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 gap-4">
             <div className="text-center">
               <div className="text-2xl font-bold text-pink-600">24</div>
               <div className="text-xs text-gray-500">Properties Liked</div>
@@ -59,10 +56,6 @@ const ProfilePage = ({ setCurrentView }) => {
             <div className="text-center">
               <div className="text-2xl font-bold text-purple-600">8</div>
               <div className="text-xs text-gray-500">Properties Saved</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-blue-600">3</div>
-              <div className="text-xs text-gray-500">Applications Sent</div>
             </div>
           </div>
         </div>
@@ -77,7 +70,7 @@ const ProfilePage = ({ setCurrentView }) => {
             </div>
             <div className="flex justify-between items-center">
               <span className="text-gray-600">Email</span>
-              <span className="font-medium">alex@example.com</span>
+              <span className="font-medium">4Q1J@cfc.com</span>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-gray-600">Location Preference</span>
@@ -85,7 +78,7 @@ const ProfilePage = ({ setCurrentView }) => {
             </div>
             <div className="flex justify-between items-center">
               <span className="text-gray-600">Budget Range</span>
-              <span className="font-medium">$500-$1000/per week</span>
+              <span className="font-medium">$300-$600/per week</span>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-gray-600">Verification Status</span>
@@ -101,7 +94,8 @@ const ProfilePage = ({ setCurrentView }) => {
         <div className="bg-white rounded-2xl p-4">
           <h3 className="font-semibold mb-4">My Activity</h3>
           <div className="space-y-3">
-            <button className="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors">
+            <button className="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors"
+              onClick={() => setCurrentView("property-list")}>  
               <div className="flex items-center">
                 <Heart className="w-5 h-5 text-pink-500 mr-3" />
                 <span>Saved Properties</span>
@@ -207,48 +201,6 @@ const ProfilePage = ({ setCurrentView }) => {
           </div>
         </div>
 
-        {/* Recent Activity */}
-        <div className="bg-white rounded-2xl p-4">
-          <h3 className="font-semibold mb-4">Recent Activity</h3>
-          <div className="space-y-3">
-            <div className="flex items-center space-x-3 p-2">
-              <div className="w-8 h-8 bg-pink-100 rounded-full flex items-center justify-center">
-                <Heart className="w-4 h-4 text-pink-500" />
-              </div>
-              <div className="flex-1">
-                <p className="text-sm font-medium">
-                  Liked "Modern Studio Apartment"
-                </p>
-                <p className="text-xs text-gray-500">2 hours ago</p>
-              </div>
-            </div>
-
-            <div className="flex items-center space-x-3 p-2">
-              <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                <FileText className="w-4 h-4 text-blue-500" />
-              </div>
-              <div className="flex-1">
-                <p className="text-sm font-medium">
-                  Applied to "Cozy 2-Bedroom"
-                </p>
-                <p className="text-xs text-gray-500">1 day ago</p>
-              </div>
-            </div>
-
-            <div className="flex items-center space-x-3 p-2">
-              <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                <Settings className="w-4 h-4 text-green-500" />
-              </div>
-              <div className="flex-1">
-                <p className="text-sm font-medium">
-                  Updated search preferences
-                </p>
-                <p className="text-xs text-gray-500">3 days ago</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
         {/* Sign Out */}
         <div className="bg-white rounded-2xl p-4">
           <button
@@ -259,11 +211,13 @@ const ProfilePage = ({ setCurrentView }) => {
             Sign Out
           </button>
         </div>
+        
       </div>
-
+      {/* Bottom Navigation should be outside the main content */}
       <BottomNav currentView="profile" setCurrentView={setCurrentView} />
     </div>
+    
   );
-};
+}
 
 export default ProfilePage;

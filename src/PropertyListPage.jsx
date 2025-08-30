@@ -7,143 +7,46 @@ import {
   User,
   MessageCircle,
   Users,
+  Heart,
   Star,
   Filter,
   SortAsc,
-  ArrowLeft,
-  ChevronRight,
-  Clock,
 } from "lucide-react";
+import { getFavoriteProperties } from "./data/properties.js";
 
-const PropertyChatPage = ({ setCurrentView }) => {
+const PropertyListPage = ({ setCurrentView }) => {
+  const [likedProperties, setLikedProperties] = useState(new Set());
   const [sortBy, setSortBy] = useState("price");
-  const [selectedProperty, setSelectedProperty] = useState(null);
-  const [showBooking, setShowBooking] = useState(false);
-  const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
 
-  // 房产数据
-  const properties = [
-    {
-      id: 1,
-      title: "Modern Studio Apartment",
-      price: "$550/week",
-      location: "Northbridge, Perth",
-      bedrooms: 1,
-      bathrooms: 1,
-      area: "650 sq ft",
-      description: "Beautiful modern studio with great city views",
-      features: ["5 min to subway", "24/7 security"],
-      lastMessage: "New inspection time available",
-      time: "2 min ago",
-      unreadCount: 1,
-      agent: {
-        name: "Marcus Chen",
-        avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
-      }
-    },
-    {
-      id: 2,
-      title: "Cozy 2-Bedroom Loft",
-      price: "$800/week",
-      location: "Fremantle, Perth",
-      bedrooms: 2,
-      bathrooms: 1,
-      area: "950 sq ft",
-      description: "Charming loft with exposed brick walls",
-      features: ["Exposed brick", "High ceilings"],
-      lastMessage: "Congratulations! Contract ready",
-      time: "1 hour ago",
-      unreadCount: 2,
-      agent: {
-        name: "Marcus Chen",
-        avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
-      }
-    },
-    {
-      id: 3,
-      title: "Luxury 3-Bedroom Penthouse",
-      price: "$2,125/week",
-      location: "South Perth, Perth",
-      bedrooms: 3,
-      bathrooms: 2,
-      area: "1,800 sq ft",
-      description: "Stunning penthouse with panoramic city views",
-      features: ["City views", "Doorman"],
-      lastMessage: "Property still available",
-      time: "3 hours ago",
-      unreadCount: 0,
-      agent: {
-        name: "Isabella Rodriguez",
-        avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face"
-      }
-    },
-    {
-      id: 4,
-      title: "Bright 1-Bedroom Apartment",
-      price: "$700/week",
-      location: "Subiaco, Perth",
-      bedrooms: 1,
-      bathrooms: 1,
-      area: "750 sq ft",
-      description: "Sunny apartment with large windows",
-      features: ["Large windows", "Private balcony"],
-      lastMessage: "Property has been leased",
-      time: "5 hours ago",
-      unreadCount: 1,
-      agent: {
-        name: "David Thompson",
-        avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
-      }
-    },
-    {
-      id: 5,
-      title: "Spacious Family Townhouse",
-      price: "$1,375/week",
-      location: "Nedlands, Perth",
-      bedrooms: 4,
-      bathrooms: 3,
-      area: "2,200 sq ft",
-      description: "Perfect family home with backyard",
-      features: ["Backyard", "Garage"],
-      lastMessage: "Awaiting Contract Signing",
-      time: "1 day ago",
-      unreadCount: 0,
-      agent: {
-        name: "Emma Watson",
-        avatar: "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=150&h=150&fit=crop&crop=face"
-      }
-    },
-  ];
+  // Get favorite properties from unified data source
+  const favoriteProperties = getFavoriteProperties();
 
-  const [propertyList, setPropertyList] = useState(properties);
-
-  const timeSlots = [
-    { id: 1, time: "14:00-14:30", available: true },
-    { id: 2, time: "14:30-15:00", available: true },
-    { id: 3, time: "15:00-15:30", available: false },
-  ];
-
-  const handleSwipeDelete = (propertyId) => {
-    setPropertyList(prev => prev.filter(p => p.id !== propertyId));
+  const toggleLike = (propertyId) => {
+    setLikedProperties((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(propertyId)) {
+        newSet.delete(propertyId);
+      } else {
+        newSet.add(propertyId);
+      }
+      return newSet;
+    });
   };
 
-  const openPropertyChat = (property) => {
-    setSelectedProperty(property);
-  };
-
-  const sortedProperties = [...propertyList].sort((a, b) => {
+  const sortedProperties = [...favoriteProperties].sort((a, b) => {
     switch (sortBy) {
       case "price":
-        return parseInt(a.price.replace(/[^\d]/g, "")) - parseInt(b.price.replace(/[^\d]/g, ""));
+        const priceA = parseInt(a.price.replace(/[$,]/g, ""));
+        const priceB = parseInt(b.price.replace(/[$,]/g, ""));
+        return priceA - priceB;
       case "rating":
         return b.rating - a.rating;
-      case "area":
-        return parseInt(b.area.replace(/[^\d]/g, "")) - parseInt(a.area.replace(/[^\d]/g, ""));
+      case "bedrooms":
+        return b.bedrooms - a.bedrooms;
       default:
         return 0;
     }
   });
-
   // 聊天页面组件
   const ChatView = ({ property, onBack }) => {
     const getMessageContent = (propertyId) => {
@@ -425,32 +328,42 @@ const PropertyChatPage = ({ setCurrentView }) => {
     <div className="min-h-screen bg-gray-50 flex flex-col">
       {/* 固定的Header */}
       <div className="fixed top-0 left-0 right-0 p-4 border-b border-gray-200 bg-white z-10">
+
         <div className="flex items-center justify-between mb-4">
-          <h1 className="text-xl font-semibold">Property Chats</h1>
+          <div>
+            <h1 className="text-xl font-semibold text-gray-800">
+              My Favorites
+            </h1>
+            <p className="text-sm text-gray-500">
+              {favoriteProperties.length} properties saved
+            </p>
+          </div>
+          <button
+            onClick={() => setCurrentView("home")}
+            className="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center"
+          >
+            <Home className="w-5 h-5 text-indigo-600" />
+          </button>
         </div>
 
-        {/* Sort Options */}
-        <div className="flex space-x-2">
-          {[
-            { key: "price", label: "Price" },
-            { key: "rating", label: "Bedrooms" },
-            { key: "area", label: "Size" },
-          ].map((option) => (
-            <button
-              key={option.key}
-              onClick={() => setSortBy(option.key)}
-              className={`px-3 py-1 rounded-full text-sm ${
-                sortBy === option.key
-                  ? "bg-purple-100 text-purple-600"
-                  : "bg-gray-100 text-gray-600"
-              }`}
+        {/* Sort and Filter Options */}
+        <div className="flex items-center space-x-3">
+          <div className="flex-1">
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+              className="w-full p-2 border border-gray-200 rounded-lg text-sm bg-white"
             >
-              {option.label}
-            </button>
-          ))}
+              <option value="price">Sort by Price</option>
+              <option value="rating">Sort by Rating</option>
+              <option value="bedrooms">Sort by Bedrooms</option>
+            </select>
+          </div>
+          <button className="p-2 border border-gray-200 rounded-lg">
+            <Filter className="w-5 h-5 text-gray-600" />
+          </button>
         </div>
       </div>
-
       {/* 可滚动的Property Chat List */}
       <div className="flex-1 pt-28 pb-20 overflow-y-auto">
         {sortedProperties.length === 0 ? (
@@ -596,9 +509,10 @@ const PropertyChatPage = ({ setCurrentView }) => {
       </div>
 
       {/* 固定的底部导航栏 */}
+
       <BottomNav currentView="property-list" setCurrentView={setCurrentView} />
     </div>
   );
 };
 
-export default PropertyChatPage;
+export default PropertyListPage;

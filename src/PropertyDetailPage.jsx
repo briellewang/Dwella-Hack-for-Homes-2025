@@ -20,8 +20,6 @@ import {
   Users,
 } from "lucide-react";
 
-
-
 const PropertyDetailPage = ({ propertyId, setCurrentView }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -55,10 +53,18 @@ const PropertyDetailPage = ({ propertyId, setCurrentView }) => {
     ],
     landlord: {
       name: "Sarah Johnson",
-      rating: 4.8,
-      reviews: 24,
+      company: "Property Management Solutions",
       responseTime: "2 hours",
       verified: true
+    },
+    agent: {
+      name: "Marcus Chen",
+      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+      company: "Perth Real Estate Group",
+      responseTime: "1 hour",
+      verified: true,
+      experience: "5+ years",
+      specializations: ["Luxury Properties", "Investment Properties", "First-time Buyers"]
     },
     availability: "Available Now",
     listedDate: "2 days ago",
@@ -296,17 +302,80 @@ const PropertyDetailPage = ({ propertyId, setCurrentView }) => {
             </div>
           </div>
         </div>
+
+        {/* Agent Info */}
+        <div className="bg-white rounded-lg p-4 border border-gray-200">
+          <h3 className="text-lg font-semibold text-gray-800 mb-3">
+            Listing Agent
+          </h3>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <img
+                src={property.agent.avatar}
+                alt={property.agent.name}
+                className="w-12 h-12 rounded-full object-cover"
+              />
+              <div>
+                <div className="font-medium text-gray-800">
+                  {property.agent.name}
+                </div>
+                <div className="text-sm text-gray-600">
+                  {property.agent.company}
+                </div>
+                <div className="text-xs text-gray-500 mt-1">
+                  {property.agent.experience} experience
+                </div>
+              </div>
+            </div>
+            <div className="text-right">
+              <div className="text-sm text-gray-500">Response time</div>
+              <div className="flex items-center text-sm text-gray-600">
+                <Clock className="w-4 h-4 mr-1" />
+                {property.agent.responseTime}
+              </div>
+            </div>
+          </div>
+          
+          {/* Agent Specializations */}
+          <div className="mt-3 pt-3 border-t border-gray-100">
+            <div className="text-sm text-gray-500 mb-2">Specializations:</div>
+            <div className="flex flex-wrap gap-2">
+              {property.agent.specializations.map((spec, index) => (
+                <span
+                  key={index}
+                  className="px-2 py-1 bg-indigo-50 text-indigo-600 text-xs rounded-full"
+                >
+                  {spec}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Fixed Action Buttons - Above bottom navigation */}
       <div className="fixed bottom-16 left-0 right-0 bg-white border-t border-gray-200 p-4 z-40">
         <div className="flex space-x-3">
-          <button className="flex-1 bg-gray-100 text-gray-700 py-3 px-4 rounded-lg font-medium hover:bg-gray-200 transition-colors">
-            <MessageSquare className="w-5 h-5 inline mr-2" />
-            Message
+          <button
+            onClick={() => setIsFavorite(!isFavorite)}
+            className={`flex-1 py-3 px-4 rounded-lg font-medium transition-colors flex items-center justify-center gap-2 ${
+              isFavorite
+                ? "bg-red-50 text-red-600 border border-red-200"
+                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+            }`}
+          >
+            <Heart className={`w-5 h-5 ${isFavorite ? "fill-current" : ""}`} />
+            {isFavorite ? "Favorited" : "Add to Favorites"}
           </button>
-          <button className="flex-1 bg-indigo-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-indigo-700 transition-colors">
-            <Phone className="w-5 h-5 inline mr-2" />
+
+          <button
+            onClick={() => {
+              // Handle call functionality
+              window.open(`tel:+61412345678`, '_self');
+            }}
+            className="flex-1 bg-indigo-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-indigo-700 transition-colors flex items-center justify-center gap-2"
+          >
+            <Phone className="w-5 h-5" />
             Call Now
           </button>
         </div>
