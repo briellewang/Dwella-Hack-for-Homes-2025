@@ -163,9 +163,10 @@ const LandlordHomePage = ({ setCurrentView }) => {
       description: "Beautiful modern studio with great city views",
       features: ["5 min to subway", "24/7 security"],
       images: [
-        "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400&h=300&fit=crop",
-        "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&h=300&fit=crop",
-        "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=400&h=300&fit=crop",
+        "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&h=600&fit=crop",
+        "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&h=600&fit=crop",
+        "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800&h=600&fit=crop",
+        "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&h=600&fit=crop",
       ],
       status: "available",
       tenant: null,
