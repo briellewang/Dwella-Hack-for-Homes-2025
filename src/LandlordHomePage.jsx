@@ -124,12 +124,14 @@ const LandlordHomePage = ({ setCurrentView }) => {
           <span className="text-xs">Add Property</span>
         </button>
         <button
+          onClick={() => setShowApplications(true)}
           className={`flex flex-col items-center py-2 px-4 text-gray-400`}
         >
           <MessageSquare className="w-6 h-6 mb-1" />
           <span className="text-xs">Applications</span>
         </button>
         <button
+          onClick={() => setCurrentView("filter")}
           className={`flex flex-col items-center py-2 px-4 text-gray-400`}
         >
           <Calendar className="w-6 h-6 mb-1" />
@@ -330,7 +332,10 @@ const LandlordHomePage = ({ setCurrentView }) => {
             </div>
           </button>
 
-          <button className="bg-white rounded-2xl p-4 shadow-sm flex items-center space-x-3 hover:shadow-md transition-shadow">
+          <button 
+            onClick={() => setShowApplications(true)}
+            className="bg-white rounded-2xl p-4 shadow-sm flex items-center space-x-3 hover:shadow-md transition-shadow"
+          >
             <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
               <MessageSquare className="w-5 h-5 text-green-600" />
             </div>
