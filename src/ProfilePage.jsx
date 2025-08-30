@@ -19,55 +19,55 @@ import {
 } from "lucide-react";
 
 const ProfilePage = ({ setCurrentView }) => {
-  // Bottom Navigation Component (inline)
+  // Bottom Navigation Component (适配手机app容器)
   const BottomNav = ({ currentView, setCurrentView }) => (
-    <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2">
+    <div className="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2">
       <div className="flex justify-around">
         <button
           onClick={() => setCurrentView("home")}
-          className={`flex flex-col items-center py-2 px-4 ${
+          className={`flex flex-col items-center py-2 px-2 ${
             currentView === "home" ? "text-purple-600" : "text-gray-400"
           }`}
         >
-          <Home className="w-6 h-6 mb-1" />
+          <Home className="w-5 h-5 mb-1" />
           <span className="text-xs">Discover</span>
         </button>
         <button
           onClick={() => setCurrentView("property-list")}
-          className={`flex flex-col items-center py-2 px-4 ${
+          className={`flex flex-col items-center py-2 px-2 ${
             currentView === "property-list"
               ? "text-purple-600"
               : "text-gray-400"
           }`}
         >
-          <Search className="w-6 h-6 mb-1" />
+          <Search className="w-5 h-5 mb-1" />
           <span className="text-xs">Browse</span>
         </button>
         <button
           onClick={() => setCurrentView("llm-input")}
-          className={`flex flex-col items-center py-2 px-4 ${
+          className={`flex flex-col items-center py-2 px-2 ${
             currentView === "llm-input" ? "text-purple-600" : "text-gray-400"
           }`}
         >
-          <MessageCircle className="w-6 h-6 mb-1" />
+          <MessageCircle className="w-5 h-5 mb-1" />
           <span className="text-xs">AI Search</span>
         </button>
         <button
           onClick={() => setCurrentView("forum")}
-          className={`flex flex-col items-center py-2 px-4 ${
+          className={`flex flex-col items-center py-2 px-2 ${
             currentView === "forum" ? "text-purple-600" : "text-gray-400"
           }`}
         >
-          <Users className="w-6 h-6 mb-1" />
+          <Users className="w-5 h-5 mb-1" />
           <span className="text-xs">Forum</span>
         </button>
         <button
           onClick={() => setCurrentView("profile")}
-          className={`flex flex-col items-center py-2 px-4 ${
+          className={`flex flex-col items-center py-2 px-2 ${
             currentView === "profile" ? "text-purple-600" : "text-gray-400"
           }`}
         >
-          <User className="w-6 h-6 mb-1" />
+          <User className="w-5 h-5 mb-1" />
           <span className="text-xs">Profile</span>
         </button>
       </div>
@@ -143,7 +143,6 @@ const ProfilePage = ({ setCurrentView }) => {
               </span>
             </div>
           </div>
-        </div>
 
         {/* My Activity */}
         <div className="bg-white rounded-2xl p-4">
@@ -155,116 +154,137 @@ const ProfilePage = ({ setCurrentView }) => {
                 <Heart className="w-5 h-5 text-pink-500 mr-3" />
                 <span>Saved Properties</span>
               </div>
-              <div className="flex items-center">
-                <span className="text-sm text-gray-500 mr-2">8 items</span>
-                <ChevronRight className="w-4 h-4 text-gray-400" />
+              <div className="flex justify-between items-center">
+                <span className="text-gray-600">Email</span>
+                <span className="font-medium">alex@example.com</span>
               </div>
             </button>
           </div>
-        </div>
 
-        {/* Account Settings */}
-        <div className="bg-white rounded-2xl p-4">
-          <h3 className="font-semibold mb-4">Account Settings</h3>
-          <div className="space-y-3">
-            <button
-              onClick={() => setCurrentView("landlord-login")}
-              className="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors"
-            >
-              <div className="flex items-center">
-                <Settings className="w-5 h-5 text-indigo-500 mr-3" />
-                <span>Switch to Landlord Mode</span>
-              </div>
-              <ChevronRight className="w-4 h-4 text-gray-400" />
-            </button>
+          {/* My Activity */}
+          <div className="bg-white rounded-2xl p-4">
+            <h3 className="font-semibold mb-4">My Activity</h3>
+            <div className="space-y-3">
+              <button className="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors">
+                <div className="flex items-center">
+                  <Heart className="w-5 h-5 text-pink-500 mr-3" />
+                  <span>Saved Properties</span>
+                </div>
+                <div className="flex items-center">
+                  <span className="text-sm text-gray-500 mr-2">8 items</span>
+                  <ChevronRight className="w-4 h-4 text-gray-400" />
+                </div>
+              </button>
 
-            <button className="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors">
-              <div className="flex items-center">
-                <Bell className="w-5 h-5 text-orange-500 mr-3" />
-                <span>Notification Settings</span>
-              </div>
-              <ChevronRight className="w-4 h-4 text-gray-400" />
-            </button>
+              <button className="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors">
+                <div className="flex items-center">
+                  <Clock className="w-5 h-5 text-blue-500 mr-3" />
+                  <span>Application History</span>
+                </div>
+                <div className="flex items-center">
+                  <span className="text-sm text-gray-500 mr-2">3 active</span>
+                  <ChevronRight className="w-4 h-4 text-gray-400" />
+                </div>
+              </button>
 
-            <button className="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors">
-              <div className="flex items-center">
-                <Shield className="w-5 h-5 text-green-500 mr-3" />
-                <span>Privacy & Security</span>
-              </div>
-              <ChevronRight className="w-4 h-4 text-gray-400" />
-            </button>
-
-            <button className="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors">
-              <div className="flex items-center">
-                <FileText className="w-5 h-5 text-purple-500 mr-3" />
-                <span>Preferences</span>
-              </div>
-              <ChevronRight className="w-4 h-4 text-gray-400" />
-            </button>
-          </div>
-        </div>
-
-        {/* Support */}
-        <div className="bg-white rounded-2xl p-4">
-          <h3 className="font-semibold mb-4">Support</h3>
-          <div className="space-y-3">
-            <button className="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors">
-              <div className="flex items-center">
-                <HelpCircle className="w-5 h-5 text-blue-500 mr-3" />
-                <span>Help Center</span>
-              </div>
-              <ChevronRight className="w-4 h-4 text-gray-400" />
-            </button>
-
-            <button className="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors">
-              <div className="flex items-center">
-                <FileText className="w-5 h-5 text-gray-500 mr-3" />
-                <span>Terms of Service</span>
-              </div>
-              <ChevronRight className="w-4 h-4 text-gray-400" />
-            </button>
-
-            <button className="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors">
-              <div className="flex items-center">
-                <Shield className="w-5 h-5 text-gray-500 mr-3" />
-                <span>Privacy Policy</span>
-              </div>
-              <ChevronRight className="w-4 h-4 text-gray-400" />
-            </button>
-          </div>
-        </div>
-
-        {/* Recent Activity */}
-        <div className="bg-white rounded-2xl p-4">
-          <h3 className="font-semibold mb-4">Recent Activity</h3>
-          <div className="space-y-3">
-            <div className="flex items-center space-x-3 p-2">
-              <div className="w-8 h-8 bg-pink-100 rounded-full flex items-center justify-center">
-                <Heart className="w-4 h-4 text-pink-500" />
-              </div>
-              <div className="flex-1">
-                <p className="text-sm font-medium">
-                  Liked "Modern Studio Apartment"
-                </p>
-                <p className="text-xs text-gray-500">2 hours ago</p>
-              </div>
+              <button className="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors">
+                <div className="flex items-center">
+                  <FileText className="w-5 h-5 text-green-500 mr-3" />
+                  <span>Documents</span>
+                </div>
+                <div className="flex items-center">
+                  <span className="text-sm text-gray-500 mr-2">5 uploaded</span>
+                  <ChevronRight className="w-4 h-4 text-gray-400" />
+                </div>
+              </button>
             </div>
           </div>
+
+          {/* Account Settings */}
+          <div className="bg-white rounded-2xl p-4">
+            <h3 className="font-semibold mb-4">Account Settings</h3>
+            <div className="space-y-3">
+              <button
+                onClick={() => setCurrentView("landlord-login")}
+                className="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors"
+              >
+                <div className="flex items-center">
+                  <Settings className="w-5 h-5 text-indigo-500 mr-3" />
+                  <span>Switch to Landlord Mode</span>
+                </div>
+                <ChevronRight className="w-4 h-4 text-gray-400" />
+              </button>
+
+              <button className="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors">
+                <div className="flex items-center">
+                  <Bell className="w-5 h-5 text-orange-500 mr-3" />
+                  <span>Notification Settings</span>
+                </div>
+                <ChevronRight className="w-4 h-4 text-gray-400" />
+              </button>
+
+              <button className="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors">
+                <div className="flex items-center">
+                  <Shield className="w-5 h-5 text-green-500 mr-3" />
+                  <span>Privacy & Security</span>
+                </div>
+                <ChevronRight className="w-4 h-4 text-gray-400" />
+              </button>
+
+              <button className="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors">
+                <div className="flex items-center">
+                  <FileText className="w-5 h-5 text-purple-500 mr-3" />
+                  <span>Preferences</span>
+                </div>
+                <ChevronRight className="w-4 h-4 text-gray-400" />
+              </button>
+            </div>
+          </div>
+
+          {/* Support */}
+          <div className="bg-white rounded-2xl p-4">
+            <h3 className="font-semibold mb-4">Support</h3>
+            <div className="space-y-3">
+              <button className="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors">
+                <div className="flex items-center">
+                  <HelpCircle className="w-5 h-5 text-blue-500 mr-3" />
+                  <span>Help Center</span>
+                </div>
+                <ChevronRight className="w-4 h-4 text-gray-400" />
+              </button>
+
+              <button className="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors">
+                <div className="flex items-center">
+                  <FileText className="w-5 h-5 text-gray-500 mr-3" />
+                  <span>Terms of Service</span>
+                </div>
+                <ChevronRight className="w-4 h-4 text-gray-400" />
+              </button>
+
+              <button className="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors">
+                <div className="flex items-center">
+                  <Shield className="w-5 h-5 text-gray-500 mr-3" />
+                  <span>Privacy Policy</span>
+                </div>
+                <ChevronRight className="w-4 h-4 text-gray-400" />
+              </button>
+            </div>
+          </div>
+
+          {/* Sign Out */}
+          <div className="bg-white rounded-2xl p-4">
+            <button
+              onClick={() => setCurrentView("login")}
+              className="w-full flex items-center justify-center py-3 text-red-500 font-semibold hover:bg-red-50 rounded-lg transition-colors"
+            >
+              <LogOut className="w-5 h-5 mr-2" />
+              Sign Out
+            </button>
+          </div>
         </div>
 
-        {/* Sign Out */}
-        <div className="bg-white rounded-2xl p-4">
-          <button
-            onClick={() => setCurrentView("login")}
-            className="w-full flex items-center justify-center py-3 text-red-500 font-semibold hover:bg-red-50 rounded-lg transition-colors"
-          >
-            <LogOut className="w-5 h-5 mr-2" />
-            Sign Out
-          </button>
-        </div>
+        <BottomNav currentView="profile" setCurrentView={setCurrentView} />
       </div>
-
-      <BottomNav currentView="profile" setCurrentView={setCurrentView} />
     </div>
   );
 };

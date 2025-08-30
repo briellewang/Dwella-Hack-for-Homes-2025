@@ -1,6 +1,7 @@
 {
   "name": "rentswipe-app",
   "version": "1.0.0",
+  "type": "module",
   "description": "A modern rental property app with tenant and landlord interfaces",
   "main": "index.js",
   "scripts": {
