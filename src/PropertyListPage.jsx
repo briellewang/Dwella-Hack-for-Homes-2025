@@ -63,7 +63,9 @@ const PropertyListPage = ({ setCurrentView }) => {
         <button
           onClick={() => setCurrentView("property-list")}
           className={`flex flex-col items-center py-2 px-4 ${
-            currentView === "property-list" ? "text-indigo-600" : "text-gray-400"
+            currentView === "property-list"
+              ? "text-indigo-600"
+              : "text-gray-400"
           }`}
         >
           <Heart className="w-6 h-6 mb-1" />
@@ -186,16 +188,14 @@ const PropertyListPage = ({ setCurrentView }) => {
                       <button
                         onClick={() => toggleLike(property.id)}
                         className={`p-2 rounded-full ${
-                          likedProperties.has(property.id) ||
-                          property.isLiked
+                          likedProperties.has(property.id) || property.isLiked
                             ? "text-red-500 bg-red-50"
                             : "text-gray-400 bg-gray-50"
                         }`}
                       >
                         <Heart
                           className={`w-5 h-5 ${
-                            likedProperties.has(property.id) ||
-                            property.isLiked
+                            likedProperties.has(property.id) || property.isLiked
                               ? "fill-current"
                               : ""
                           }`}
@@ -260,10 +260,7 @@ const PropertyListPage = ({ setCurrentView }) => {
         )}
       </div>
 
-      <BottomNav
-        currentView="property-list"
-        setCurrentView={setCurrentView}
-      />
+      <BottomNav currentView="property-list" setCurrentView={setCurrentView} />
     </div>
   );
 };
