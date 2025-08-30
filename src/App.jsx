@@ -14,6 +14,7 @@ import SwipeRight from "./SwipeRight";
 
 function App() {
   const [currentView, setCurrentView] = useState("login");
+  const [selectedPropertyId, setSelectedPropertyId] = useState(1);
 
   const renderCurrentView = () => {
     switch (currentView) {
@@ -32,7 +33,7 @@ function App() {
       case "property-list":
         return <PropertyListPage setCurrentView={setCurrentView} />;
       case "property-detail":
-        return <PropertyDetailPage setCurrentView={setCurrentView} />;
+        return <PropertyDetailPage propertyId={1} onBack={() => setCurrentView("property-list")} />;
       case "profile":
         return <ProfilePage setCurrentView={setCurrentView} />;
       case "forum":
