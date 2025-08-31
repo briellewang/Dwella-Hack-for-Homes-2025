@@ -29,7 +29,7 @@ export const BottomNav = ({ currentView, setCurrentView }) => (
         }`}
       >
         <Search className="w-6 h-6 mb-1" />
-        <span className="text-xs">Browse</span>
+        <span className="text-xs">List</span>
       </button>
       <button
         onClick={() => setCurrentView("llm-input")}

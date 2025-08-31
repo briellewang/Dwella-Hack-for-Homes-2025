@@ -51,14 +51,10 @@ const ProfilePage = ({ setCurrentView }) => {
         {/* Quick Stats */}
         <div className="bg-white rounded-2xl p-4">
           <h3 className="font-semibold mb-4">Activity Summary</h3>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4">
             <div className="text-center">
               <div className="text-2xl font-bold text-pink-600">24</div>
               <div className="text-xs text-gray-500">Properties Liked</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-purple-600">8</div>
-              <div className="text-xs text-gray-500">Properties Saved</div>
             </div>
           </div>
         </div>
