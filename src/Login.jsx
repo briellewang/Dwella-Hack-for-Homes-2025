@@ -10,7 +10,7 @@ const LoginPage = ({ setCurrentView }) => {
             <Home className="w-10 h-10 text-white" />
           </div>
           <h1 className="text-3xl font-bold text-gray-800 mb-2">Dwella</h1>
-          <p className="text-gray-600">Find Your Place Faster</p>
+          <p className="text-gray-600">Swipe to your new home</p>
         </div>
         
         <div className="space-y-4 mb-6">
